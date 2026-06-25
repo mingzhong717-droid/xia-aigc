@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mingzhong717-droid.github.io/xia-aigc/sitemap.xml

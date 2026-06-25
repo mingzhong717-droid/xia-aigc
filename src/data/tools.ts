@@ -8,6 +8,8 @@ export interface Tool {
   tags: string[];
   isFree: boolean;
   hasChinese: boolean;
+  needVPN: boolean;
+  recommendation: string;
 }
 
 export interface Category {
@@ -29,11 +31,11 @@ export const categories: Category[] = [
   { id: "office", name: "AI办公效率", icon: "📁", description: "Excel、文档、翻译" },
   { id: "learning", name: "AI学习助手", icon: "📚", description: "学英语、解题、记忆" },
   { id: "search", name: "AI搜索引擎", icon: "🔍", description: "更聪明的搜索方式" },
+  { id: "news", name: "AI资讯动态", icon: "📰", description: "行业新闻、产品发布、趋势解读" },
   { id: "life", name: "AI生活助手", icon: "🏠", description: "健康、旅行、日常" },
 ];
 
 export const tools: Tool[] = [
-  // AI对话聊天
   {
     id: "chatgpt",
     name: "ChatGPT",
@@ -44,6 +46,8 @@ export const tools: Tool[] = [
     tags: ["对话", "写作", "编程"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "万能助手，适合问答写作编程",
   },
   {
     id: "claude",
@@ -55,6 +59,8 @@ export const tools: Tool[] = [
     tags: ["长文本", "推理", "分析"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合写长文和深度分析",
   },
   {
     id: "kimi",
@@ -66,6 +72,8 @@ export const tools: Tool[] = [
     tags: ["长文本", "国产", "中文"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合处理超长文档和论文",
   },
   {
     id: "doubao",
@@ -77,6 +85,8 @@ export const tools: Tool[] = [
     tags: ["语音", "国产", "抖音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常聊天和语音互动",
   },
   {
     id: "wenxin",
@@ -88,6 +98,8 @@ export const tools: Tool[] = [
     tags: ["百度", "国产", "中文"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合中文知识问答",
   },
   {
     id: "tongyi",
@@ -99,6 +111,8 @@ export const tools: Tool[] = [
     tags: ["阿里", "国产", "办公"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合办公和职场场景",
   },
   {
     id: "gemini",
@@ -110,6 +124,8 @@ export const tools: Tool[] = [
     tags: ["多模态", "Google", "识图"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合看图识图和多语言",
   },
   {
     id: "deepseek",
@@ -121,9 +137,9 @@ export const tools: Tool[] = [
     tags: ["推理", "编程", "国产"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合数学推理和写代码",
   },
-
-  // AI写作助手
   {
     id: "notion-ai",
     name: "Notion AI",
@@ -134,6 +150,8 @@ export const tools: Tool[] = [
     tags: ["笔记", "写作", "翻译"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合笔记整理和写作续写",
   },
   {
     id: "yijian",
@@ -145,6 +163,8 @@ export const tools: Tool[] = [
     tags: ["文案", "脚本", "国产"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合写小红书和公众号文案",
   },
   {
     id: "copy-ai",
@@ -156,6 +176,8 @@ export const tools: Tool[] = [
     tags: ["营销", "英文", "文案"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合写英文营销文案",
   },
   {
     id: "jasper",
@@ -167,9 +189,9 @@ export const tools: Tool[] = [
     tags: ["企业", "SEO", "团队"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合企业批量内容生产",
   },
-
-  // AI绘画生成
   {
     id: "midjourney",
     name: "Midjourney",
@@ -180,6 +202,8 @@ export const tools: Tool[] = [
     tags: ["艺术", "插画", "设计"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合高品质艺术插画创作",
   },
   {
     id: "stable-diffusion",
@@ -191,6 +215,8 @@ export const tools: Tool[] = [
     tags: ["开源", "免费", "本地"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合技术玩家本地跑图",
   },
   {
     id: "liblib",
@@ -202,6 +228,8 @@ export const tools: Tool[] = [
     tags: ["国产", "社区", "模型"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合找模型和AI绘画社区",
   },
   {
     id: "tongyi-wanxiang",
@@ -213,6 +241,8 @@ export const tools: Tool[] = [
     tags: ["阿里", "国产", "国风"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合中文描述生成图片",
   },
   {
     id: "doubao-image",
@@ -224,6 +254,8 @@ export const tools: Tool[] = [
     tags: ["抖音", "国产", "社交"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合做社交媒体配图",
   },
   {
     id: "jimeng",
@@ -235,9 +267,9 @@ export const tools: Tool[] = [
     tags: ["剪映", "国产", "视频"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合短视频封面和配图",
   },
-
-  // AI视频制作
   {
     id: "runway",
     name: "Runway",
@@ -248,6 +280,8 @@ export const tools: Tool[] = [
     tags: ["视频生成", "专业", "好莱坞"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "pika",
@@ -259,6 +293,8 @@ export const tools: Tool[] = [
     tags: ["视频生成", "简单", "新手"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "kling",
@@ -270,6 +306,8 @@ export const tools: Tool[] = [
     tags: ["快手", "国产", "运动"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "jimeng-video",
@@ -281,6 +319,8 @@ export const tools: Tool[] = [
     tags: ["剪映", "国产", "抖音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "luma",
@@ -292,6 +332,8 @@ export const tools: Tool[] = [
     tags: ["3D", "产品", "创意"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "sora",
@@ -303,9 +345,9 @@ export const tools: Tool[] = [
     tags: ["OpenAI", "长视频", "顶级"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
-
-  // AI音频处理
   {
     id: "suno",
     name: "Suno",
@@ -316,6 +358,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "作曲", "歌曲"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "udio",
@@ -327,6 +371,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "风格", "音质"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "elevenlabs",
@@ -338,6 +384,8 @@ export const tools: Tool[] = [
     tags: ["配音", "克隆", "旁白"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "moyin",
@@ -349,6 +397,8 @@ export const tools: Tool[] = [
     tags: ["配音", "国产", "短视频"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "tianyin",
@@ -360,9 +410,9 @@ export const tools: Tool[] = [
     tags: ["国产", "中文", "歌曲"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI音频处理",
   },
-
-  // AI做PPT
   {
     id: "gamma",
     name: "Gamma",
@@ -373,6 +423,8 @@ export const tools: Tool[] = [
     tags: ["演示", "设计", "自动排版"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "beautiful-ai",
@@ -384,6 +436,8 @@ export const tools: Tool[] = [
     tags: ["设计", "布局", "美观"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "aippt",
@@ -395,6 +449,8 @@ export const tools: Tool[] = [
     tags: ["国产", "中文", "职场"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "chatppt",
@@ -406,9 +462,9 @@ export const tools: Tool[] = [
     tags: ["对话", "国产", "交互"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
-
-  // AI编程辅助
   {
     id: "github-copilot",
     name: "GitHub Copilot",
@@ -419,6 +475,8 @@ export const tools: Tool[] = [
     tags: ["编程", "代码补全", "效率"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "cursor",
@@ -430,6 +488,8 @@ export const tools: Tool[] = [
     tags: ["编辑器", "自然语言", "热门"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "trae",
@@ -441,6 +501,8 @@ export const tools: Tool[] = [
     tags: ["国产", "IDE", "免费"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "codeium",
@@ -452,6 +514,8 @@ export const tools: Tool[] = [
     tags: ["免费", "多语言", "插件"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "v0",
@@ -463,9 +527,9 @@ export const tools: Tool[] = [
     tags: ["前端", "UI", "组件"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
-
-  // AI设计工具
   {
     id: "canva-ai",
     name: "Canva AI",
@@ -476,6 +540,8 @@ export const tools: Tool[] = [
     tags: ["设计", "海报", "简单"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "remove-bg",
@@ -487,6 +553,8 @@ export const tools: Tool[] = [
     tags: ["抠图", "背景", "证件照"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "mastergo",
@@ -498,6 +566,8 @@ export const tools: Tool[] = [
     tags: ["国产", "协作", "UI"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "logosc",
@@ -509,6 +579,8 @@ export const tools: Tool[] = [
     tags: ["Logo", "国产", "品牌"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "recraft",
@@ -520,9 +592,9 @@ export const tools: Tool[] = [
     tags: ["矢量", "插画", "设计"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
-
-  // AI办公效率
   {
     id: "chatpdf",
     name: "ChatPDF",
@@ -533,6 +605,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "问答", "阅读"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "tongyi-docs",
@@ -544,6 +618,8 @@ export const tools: Tool[] = [
     tags: ["语音转写", "会议", "国产"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "feishu",
@@ -555,6 +631,8 @@ export const tools: Tool[] = [
     tags: ["会议", "记录", "协作"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "deepl",
@@ -566,6 +644,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "高质量", "多语言"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合高质量文档翻译",
   },
   {
     id: "immersive-translate",
@@ -577,9 +657,9 @@ export const tools: Tool[] = [
     tags: ["翻译", "浏览器", "双语"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
-
-  // AI学习助手
   {
     id: "quizlet",
     name: "Quizlet",
@@ -590,6 +670,8 @@ export const tools: Tool[] = [
     tags: ["学习", "单词", "记忆"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "khan-academy",
@@ -601,6 +683,8 @@ export const tools: Tool[] = [
     tags: ["教育", "免费", "全科"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "gauth",
@@ -612,6 +696,8 @@ export const tools: Tool[] = [
     tags: ["解题", "拍照", "数学"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "duolingo",
@@ -623,9 +709,9 @@ export const tools: Tool[] = [
     tags: ["英语", "游戏", "语言"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
-
-  // AI搜索引擎
   {
     id: "perplexity",
     name: "Perplexity",
@@ -636,6 +722,8 @@ export const tools: Tool[] = [
     tags: ["搜索", "问答", "来源"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合学术搜索和深度研究",
   },
   {
     id: "devv",
@@ -647,6 +735,8 @@ export const tools: Tool[] = [
     tags: ["编程", "搜索", "代码"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "metaso",
@@ -658,6 +748,8 @@ export const tools: Tool[] = [
     tags: ["国产", "学术", "结构化"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "360-ai",
@@ -669,9 +761,9 @@ export const tools: Tool[] = [
     tags: ["国产", "总结", "快速"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
-
-  // AI生活助手
   {
     id: "xiaohongshu-ai",
     name: "小红书AI助手",
@@ -682,6 +774,8 @@ export const tools: Tool[] = [
     tags: ["社交", "种草", "生活"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "meituan-ai",
@@ -693,6 +787,8 @@ export const tools: Tool[] = [
     tags: ["本地", "美食", "出行"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "keep",
@@ -704,6 +800,8 @@ export const tools: Tool[] = [
     tags: ["健身", "计划", "饮食"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xiaoice",
@@ -715,21 +813,8 @@ export const tools: Tool[] = [
     tags: ["陪伴", "情感", "文艺"],
     isFree: true,
     hasChinese: true,
-  },
-
-  // ========== 新增工具 ==========
-
-  // AI对话聊天 - 新增
-  {
-    id: "gemini",
-    name: "Gemini",
-    description: "Google出品的多模态AI，支持文本、图片、视频理解，中文表现优秀",
-    icon: "♊",
-    url: "https://gemini.google.com",
-    category: "chat",
-    tags: ["多模态", "Google", "中文"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "wenxin-yiyan",
@@ -741,6 +826,8 @@ export const tools: Tool[] = [
     tags: ["百度", "国产", "插件"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "tongyi-qianwen",
@@ -752,6 +839,8 @@ export const tools: Tool[] = [
     tags: ["阿里", "国产", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "xinghuo",
@@ -763,6 +852,8 @@ export const tools: Tool[] = [
     tags: ["语音", "国产", "讯飞"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "zhipu-qingyan",
@@ -774,6 +865,8 @@ export const tools: Tool[] = [
     tags: ["清华", "开源", "学术"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "hunyuan",
@@ -785,6 +878,8 @@ export const tools: Tool[] = [
     tags: ["腾讯", "国产", "社交"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "poe",
@@ -796,6 +891,8 @@ export const tools: Tool[] = [
     tags: ["聚合", "对比", "多模型"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "character-ai",
@@ -807,17 +904,8 @@ export const tools: Tool[] = [
     tags: ["角色", "娱乐", "创意"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "perplexity",
-    name: "Perplexity",
-    description: "AI搜索引擎，实时联网回答，每个回答都附带来源链接",
-    icon: "❓",
-    url: "https://www.perplexity.ai",
-    category: "chat",
-    tags: ["搜索", "实时", "来源"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "you-com",
@@ -829,6 +917,8 @@ export const tools: Tool[] = [
     tags: ["隐私", "搜索", "无广告"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "pi",
@@ -840,6 +930,8 @@ export const tools: Tool[] = [
     tags: ["陪伴", "温暖", "情感"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "mistral",
@@ -851,30 +943,8 @@ export const tools: Tool[] = [
     tags: ["开源", "欧洲", "多语言"],
     isFree: true,
     hasChinese: false,
-  },
-
-  // AI写作助手 - 新增
-  {
-    id: "jasper",
-    name: "Jasper",
-    description: "专业营销文案AI，50+模板，适合广告、邮件、社交媒体",
-    icon: "💎",
-    url: "https://www.jasper.ai",
-    category: "writing",
-    tags: ["营销", "模板", "专业"],
-    isFree: false,
-    hasChinese: false,
-  },
-  {
-    id: "copy-ai",
-    name: "Copy.ai",
-    description: "营销文案生成，支持多语言，有免费额度",
-    icon: "📋",
-    url: "https://www.copy.ai",
-    category: "writing",
-    tags: ["营销", "多语言", "免费额度"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI对话和问答",
   },
   {
     id: "writesonic",
@@ -886,17 +956,8 @@ export const tools: Tool[] = [
     tags: ["SEO", "博客", "关键词"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "notion-ai",
-    name: "Notion AI",
-    description: "Notion内置AI，在笔记中直接调用，写作、总结、翻译一体化",
-    icon: "📝",
-    url: "https://www.notion.so",
-    category: "writing",
-    tags: ["笔记", "协作", "一体化"],
-    isFree: false,
-    hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "grammarly",
@@ -908,6 +969,8 @@ export const tools: Tool[] = [
     tags: ["语法", "英文", "校对"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "quillbot",
@@ -919,6 +982,8 @@ export const tools: Tool[] = [
     tags: ["改写", "润色", "学术"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "sudowrite",
@@ -930,6 +995,8 @@ export const tools: Tool[] = [
     tags: ["小说", "创意", "情节"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "novelai",
@@ -941,6 +1008,8 @@ export const tools: Tool[] = [
     tags: ["小说", "二次元", "图像"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "yiyan-writing",
@@ -952,6 +1021,8 @@ export const tools: Tool[] = [
     tags: ["百度", "公文", "论文"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "tongyi-writing",
@@ -963,6 +1034,8 @@ export const tools: Tool[] = [
     tags: ["阿里", "电商", "营销"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "paperpal",
@@ -974,6 +1047,8 @@ export const tools: Tool[] = [
     tags: ["学术", "论文", "投稿"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "wordtune",
@@ -985,6 +1060,8 @@ export const tools: Tool[] = [
     tags: ["重写", "简洁", "语气"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "rytr",
@@ -996,6 +1073,8 @@ export const tools: Tool[] = [
     tags: ["多语言", "场景", "性价比"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "hyperwrite",
@@ -1007,6 +1086,8 @@ export const tools: Tool[] = [
     tags: ["插件", "补全", "改写"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "ai-writer",
@@ -1018,6 +1099,8 @@ export const tools: Tool[] = [
     tags: ["SEO", "营销", "文章"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "textcortex",
@@ -1029,6 +1112,8 @@ export const tools: Tool[] = [
     tags: ["多语言", "插件", "改写"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助写作",
   },
   {
     id: "frase",
@@ -1040,9 +1125,9 @@ export const tools: Tool[] = [
     tags: ["SEO", "关键词", "研究"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助写作",
   },
-
-  // AI绘画生成 - 新增
   {
     id: "leonardo",
     name: "Leonardo.ai",
@@ -1053,6 +1138,8 @@ export const tools: Tool[] = [
     tags: ["游戏", "概念", "免费额度"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "playground",
@@ -1064,6 +1151,8 @@ export const tools: Tool[] = [
     tags: ["免费", "入门", "多风格"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "ideogram",
@@ -1075,6 +1164,8 @@ export const tools: Tool[] = [
     tags: ["文字", "海报", "Logo"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "firefly",
@@ -1086,6 +1177,8 @@ export const tools: Tool[] = [
     tags: ["Adobe", "专业", "集成"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "dalle",
@@ -1097,17 +1190,8 @@ export const tools: Tool[] = [
     tags: ["OpenAI", "精准", "ChatGPT"],
     isFree: false,
     hasChinese: false,
-  },
-  {
-    id: "stable-diffusion",
-    name: "Stable Diffusion",
-    description: "开源AI绘画模型，可本地部署，社区生态最丰富",
-    icon: "🌐",
-    url: "https://stability.ai",
-    category: "image",
-    tags: ["开源", "本地", "社区"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "civitai",
@@ -1119,6 +1203,8 @@ export const tools: Tool[] = [
     tags: ["模型", "社区", "免费"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "tensor-art",
@@ -1130,6 +1216,8 @@ export const tools: Tool[] = [
     tags: ["国产", "在线", "免费"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "liblibai",
@@ -1141,6 +1229,8 @@ export const tools: Tool[] = [
     tags: ["国产", "社区", "LoRA"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "6pen",
@@ -1152,6 +1242,8 @@ export const tools: Tool[] = [
     tags: ["国产", "中文", "多模型"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "wombo",
@@ -1163,6 +1255,8 @@ export const tools: Tool[] = [
     tags: ["App", "简单", "快速"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "nightcafe",
@@ -1174,6 +1268,8 @@ export const tools: Tool[] = [
     tags: ["社区", "比赛", "免费额度"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "artbreeder",
@@ -1185,6 +1281,8 @@ export const tools: Tool[] = [
     tags: ["混合", "编辑", "滑块"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI生成图片",
   },
   {
     id: "runway-gen2",
@@ -1196,17 +1294,8 @@ export const tools: Tool[] = [
     tags: ["视频", "电影", "Gen-2"],
     isFree: false,
     hasChinese: false,
-  },
-  {
-    id: "pika",
-    name: "Pika Labs",
-    description: "AI视频生成，文字/图片转视频，特效丰富",
-    icon: "⚡",
-    url: "https://pika.art",
-    category: "video",
-    tags: ["视频", "特效", "快速"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "luma-dream-machine",
@@ -1218,17 +1307,8 @@ export const tools: Tool[] = [
     tags: ["视频", "物理", "自然"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "kling",
-    name: "可灵AI",
-    description: "快手出品AI视频，国产最强视频生成，支持长视频",
-    icon: "🎥",
-    url: "https://klingai.com",
-    category: "video",
-    tags: ["国产", "快手", "长视频"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "vidu",
@@ -1240,6 +1320,8 @@ export const tools: Tool[] = [
     tags: ["国产", "清晰", "生数"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "haiper",
@@ -1251,6 +1333,8 @@ export const tools: Tool[] = [
     tags: ["免费", "社区", "分享"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "stable-video",
@@ -1262,6 +1346,8 @@ export const tools: Tool[] = [
     tags: ["开源", "图片转视频", "商用"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "kaiber",
@@ -1273,6 +1359,8 @@ export const tools: Tool[] = [
     tags: ["音乐视频", "音频驱动", "艺术"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "synthesia",
@@ -1284,6 +1372,8 @@ export const tools: Tool[] = [
     tags: ["数字人", "多语言", "企业"],
     isFree: false,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "heygen",
@@ -1295,6 +1385,8 @@ export const tools: Tool[] = [
     tags: ["数字人", "营销", "模板"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "d-id",
@@ -1306,6 +1398,8 @@ export const tools: Tool[] = [
     tags: ["照片说话", "创意", "视频"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "invideo",
@@ -1317,6 +1411,8 @@ export const tools: Tool[] = [
     tags: ["编辑", "素材", "文字转视频"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "opus-clip",
@@ -1328,6 +1424,8 @@ export const tools: Tool[] = [
     tags: ["剪辑", "短视频", "高光"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "wisecut",
@@ -1339,6 +1437,8 @@ export const tools: Tool[] = [
     tags: ["自动剪辑", "字幕", "音乐"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "descript",
@@ -1350,6 +1450,8 @@ export const tools: Tool[] = [
     tags: ["编辑", "文档", "音视频"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "pictory",
@@ -1361,6 +1463,8 @@ export const tools: Tool[] = [
     tags: ["文字转视频", "素材", "创作"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "fliki",
@@ -1372,28 +1476,8 @@ export const tools: Tool[] = [
     tags: ["文字转视频", "语音", "多语言"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "suno",
-    name: "Suno",
-    description: "AI音乐生成，输入文字生成完整歌曲，支持多种风格",
-    icon: "🎸",
-    url: "https://suno.com",
-    category: "audio",
-    tags: ["音乐", "歌曲", "风格"],
-    isFree: true,
-    hasChinese: false,
-  },
-  {
-    id: "udio",
-    name: "Udio",
-    description: "AI音乐生成，音质优秀，支持人声和乐器",
-    icon: "🎹",
-    url: "https://www.udio.com",
-    category: "audio",
-    tags: ["音乐", "人声", "乐器"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI制作视频",
   },
   {
     id: "aiva",
@@ -1405,6 +1489,8 @@ export const tools: Tool[] = [
     tags: ["作曲", "古典", "影视"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "soundraw",
@@ -1416,6 +1502,8 @@ export const tools: Tool[] = [
     tags: ["免版权", "商用", "视频"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "boomy",
@@ -1427,6 +1515,8 @@ export const tools: Tool[] = [
     tags: ["创作", "发布", "平台"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "mubert",
@@ -1438,17 +1528,8 @@ export const tools: Tool[] = [
     tags: ["背景", "直播", "游戏"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "elevenlabs",
-    name: "ElevenLabs",
-    description: "AI语音克隆和合成，最自然的AI语音，支持28种语言",
-    icon: "🗣️",
-    url: "https://elevenlabs.io",
-    category: "audio",
-    tags: ["语音克隆", "自然", "多语言"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "murf",
@@ -1460,6 +1541,8 @@ export const tools: Tool[] = [
     tags: ["配音", "多语言", "视频"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "play-ht",
@@ -1471,6 +1554,8 @@ export const tools: Tool[] = [
     tags: ["TTS", "多语言", "语音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "lovo",
@@ -1482,6 +1567,8 @@ export const tools: Tool[] = [
     tags: ["语音", "情感", "多语言"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "descript-audio",
@@ -1493,6 +1580,8 @@ export const tools: Tool[] = [
     tags: ["克隆", "合成", "编辑"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "krisp",
@@ -1504,6 +1593,8 @@ export const tools: Tool[] = [
     tags: ["降噪", "会议", "录音"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "adobe-podcast",
@@ -1515,6 +1606,8 @@ export const tools: Tool[] = [
     tags: ["增强", "录音", "Adobe"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "lalal",
@@ -1526,6 +1619,8 @@ export const tools: Tool[] = [
     tags: ["分离", "伴奏", "提取"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "moises",
@@ -1537,28 +1632,8 @@ export const tools: Tool[] = [
     tags: ["分离", "练习", "乐器"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "gamma",
-    name: "Gamma",
-    description: "AI生成演示文稿，文字转PPT，设计精美",
-    icon: "📊",
-    url: "https://gamma.app",
-    category: "ppt",
-    tags: ["PPT", "设计", "精美"],
-    isFree: true,
-    hasChinese: false,
-  },
-  {
-    id: "beautiful-ai",
-    name: "Beautiful.ai",
-    description: "AI智能PPT，自动排版，设计规范，适合商务",
-    icon: "💼",
-    url: "https://www.beautiful.ai",
-    category: "ppt",
-    tags: ["商务", "排版", "规范"],
-    isFree: false,
-    hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI音频处理",
   },
   {
     id: "tome",
@@ -1570,6 +1645,8 @@ export const tools: Tool[] = [
     tags: ["叙事", "故事", "创意"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "pitch",
@@ -1581,6 +1658,8 @@ export const tools: Tool[] = [
     tags: ["协作", "团队", "模板"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "slidebean",
@@ -1592,6 +1671,8 @@ export const tools: Tool[] = [
     tags: ["自动", "设计", "幻灯片"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "presentations-ai",
@@ -1603,6 +1684,8 @@ export const tools: Tool[] = [
     tags: ["主题", "自动", "文稿"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "sendsteps",
@@ -1614,6 +1697,8 @@ export const tools: Tool[] = [
     tags: ["互动", "投票", "问答"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "decktopus",
@@ -1625,6 +1710,8 @@ export const tools: Tool[] = [
     tags: ["新手", "建议", "智能"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "slidesai",
@@ -1636,6 +1723,8 @@ export const tools: Tool[] = [
     tags: ["插件", "Google", "集成"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "classpoint",
@@ -1647,28 +1736,8 @@ export const tools: Tool[] = [
     tags: ["教学", "互动", "教师"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "github-copilot",
-    name: "GitHub Copilot",
-    description: "GitHub出品AI编程助手，代码补全最强大，支持多种语言",
-    icon: "🤖",
-    url: "https://github.com/features/copilot",
-    category: "code",
-    tags: ["代码补全", "GitHub", "多语言"],
-    isFree: false,
-    hasChinese: false,
-  },
-  {
-    id: "cursor",
-    name: "Cursor",
-    description: "AI代码编辑器，基于VS Code，内置ChatGPT，代码生成神器",
-    icon: "🖱️",
-    url: "https://cursor.com",
-    category: "code",
-    tags: ["编辑器", "ChatGPT", "神器"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI做演示文稿",
   },
   {
     id: "windsurf",
@@ -1680,6 +1749,8 @@ export const tools: Tool[] = [
     tags: ["IDE", "免费", "GPT-4"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "tabnine",
@@ -1691,6 +1762,8 @@ export const tools: Tool[] = [
     tags: ["本地", "隐私", "安全"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "replit",
@@ -1702,17 +1775,8 @@ export const tools: Tool[] = [
     tags: ["在线", "云端", "Ghostwriter"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "codeium",
-    name: "Codeium",
-    description: "免费AI编程助手，支持70+语言，IDE插件",
-    icon: "💎",
-    url: "https://codeium.com",
-    category: "code",
-    tags: ["免费", "多语言", "插件"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "amazon-codewhisperer",
@@ -1724,6 +1788,8 @@ export const tools: Tool[] = [
     tags: ["AWS", "安全", "扫描"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "sourcegraph-cody",
@@ -1735,6 +1801,8 @@ export const tools: Tool[] = [
     tags: ["搜索", "代码库", "理解"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "continue",
@@ -1746,6 +1814,8 @@ export const tools: Tool[] = [
     tags: ["开源", "插件", "多模型"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "pieces",
@@ -1757,6 +1827,8 @@ export const tools: Tool[] = [
     tags: ["片段", "管理", "复用"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "blackbox",
@@ -1768,6 +1840,8 @@ export const tools: Tool[] = [
     tags: ["图片转代码", "搜索", "生成"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助编程",
   },
   {
     id: "figma-ai",
@@ -1779,6 +1853,8 @@ export const tools: Tool[] = [
     tags: ["Figma", "布局", "生成"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "canva-magic",
@@ -1790,17 +1866,8 @@ export const tools: Tool[] = [
     tags: ["Canva", "套件", "魔法"],
     isFree: true,
     hasChinese: true,
-  },
-  {
-    id: "midjourney",
-    name: "Midjourney",
-    description: "AI艺术生成，画质最精美，艺术风格最强",
-    icon: "🌈",
-    url: "https://www.midjourney.com",
-    category: "design",
-    tags: ["艺术", "精美", "风格"],
-    isFree: false,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "looka",
@@ -1812,6 +1879,8 @@ export const tools: Tool[] = [
     tags: ["Logo", "品牌", "专业"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "brandmark",
@@ -1823,6 +1892,8 @@ export const tools: Tool[] = [
     tags: ["品牌", "全套", "设计"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "uizard",
@@ -1834,6 +1905,8 @@ export const tools: Tool[] = [
     tags: ["UI", "原型", "草图"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "galileo-ai",
@@ -1845,6 +1918,8 @@ export const tools: Tool[] = [
     tags: ["UI", "高保真", "文字生成"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "framer-ai",
@@ -1856,6 +1931,8 @@ export const tools: Tool[] = [
     tags: ["网站", "交互", "文字生成"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "dora-ai",
@@ -1867,17 +1944,8 @@ export const tools: Tool[] = [
     tags: ["3D", "网站", "动画"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "remove-bg",
-    name: "Remove.bg",
-    description: "AI自动抠图，一键去除背景，效果精准",
-    icon: "✂️",
-    url: "https://www.remove.bg",
-    category: "design",
-    tags: ["抠图", "背景", "精准"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "photoroom",
@@ -1889,6 +1957,8 @@ export const tools: Tool[] = [
     tags: ["产品图", "电商", "背景"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "clipdrop",
@@ -1900,6 +1970,8 @@ export const tools: Tool[] = [
     tags: ["图像", "抠图", "扩图"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "upscale",
@@ -1911,6 +1983,8 @@ export const tools: Tool[] = [
     tags: ["放大", "开源", "无损"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "bigjpg",
@@ -1922,6 +1996,8 @@ export const tools: Tool[] = [
     tags: ["放大", "动漫", "中文"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "palette",
@@ -1933,6 +2009,8 @@ export const tools: Tool[] = [
     tags: ["上色", "黑白", "批量"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "restore",
@@ -1944,6 +2022,8 @@ export const tools: Tool[] = [
     tags: ["修复", "老照片", "清晰"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "watermark",
@@ -1955,6 +2035,8 @@ export const tools: Tool[] = [
     tags: ["去水印", "图片", "视频"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助设计",
   },
   {
     id: "microsoft-copilot",
@@ -1966,6 +2048,8 @@ export const tools: Tool[] = [
     tags: ["Office", "微软", "集成"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "google-workspace",
@@ -1977,6 +2061,8 @@ export const tools: Tool[] = [
     tags: ["Google", "文档", "Gemini"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "notion",
@@ -1988,6 +2074,8 @@ export const tools: Tool[] = [
     tags: ["笔记", "知识", "管理"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "mem",
@@ -1999,6 +2087,8 @@ export const tools: Tool[] = [
     tags: ["知识", "关联", "搜索"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "otter",
@@ -2010,6 +2100,8 @@ export const tools: Tool[] = [
     tags: ["会议", "转录", "总结"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "fireflies",
@@ -2021,6 +2113,8 @@ export const tools: Tool[] = [
     tags: ["会议", "分析", "行动项"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "tl-dv",
@@ -2032,6 +2126,8 @@ export const tools: Tool[] = [
     tags: ["会议", "多语言", "集成"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "deep-l",
@@ -2043,6 +2139,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "文档", "质量"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "quillbot-translate",
@@ -2054,6 +2152,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "改写", "学术"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "language-tool",
@@ -2065,6 +2165,8 @@ export const tools: Tool[] = [
     tags: ["语法", "多语言", "开源"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "monica",
@@ -2076,28 +2178,8 @@ export const tools: Tool[] = [
     tags: ["浏览器", "插件", "翻译"],
     isFree: true,
     hasChinese: true,
-  },
-  {
-    id: "immersive-translate",
-    name: "沉浸式翻译",
-    description: "AI双语网页翻译，PDF翻译，EPUB翻译，开源免费",
-    icon: "📖",
-    url: "https://immersivetranslate.com",
-    category: "office",
-    tags: ["翻译", "双语", "开源"],
-    isFree: true,
-    hasChinese: true,
-  },
-  {
-    id: "chatpdf",
-    name: "ChatPDF",
-    description: "AI文档问答，上传PDF即可对话，快速提取信息",
-    icon: "📄",
-    url: "https://www.chatpdf.com",
-    category: "office",
-    tags: ["PDF", "问答", "提取"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "humata",
@@ -2109,6 +2191,8 @@ export const tools: Tool[] = [
     tags: ["分析", "总结", "数据"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "pdf-ai",
@@ -2120,6 +2204,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "问答", "翻译"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "smallpdf",
@@ -2131,6 +2217,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "编辑", "转换"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "ilovepdf",
@@ -2142,28 +2230,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "合并", "拆分"],
     isFree: true,
     hasChinese: true,
-  },
-  {
-    id: "khan-academy",
-    name: "Khan Academy AI",
-    description: "可汗学院AI导师，个性化学习，AI辅导数学、科学",
-    icon: "📚",
-    url: "https://www.khanacademy.org",
-    category: "learning",
-    tags: ["教育", "辅导", "个性化"],
-    isFree: true,
-    hasChinese: false,
-  },
-  {
-    id: "duolingo",
-    name: "Duolingo",
-    description: "AI语言学习，游戏化课程，个性化学习路径",
-    icon: "🦉",
-    url: "https://www.duolingo.com",
-    category: "learning",
-    tags: ["语言", "游戏", "个性化"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "elsa-speak",
@@ -2175,6 +2243,8 @@ export const tools: Tool[] = [
     tags: ["口语", "发音", "外教"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "speak",
@@ -2186,6 +2256,8 @@ export const tools: Tool[] = [
     tags: ["口语", "对话", "OpenAI"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "caktus",
@@ -2197,6 +2269,8 @@ export const tools: Tool[] = [
     tags: ["学习", "论文", "解题"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "socratic",
@@ -2208,17 +2282,8 @@ export const tools: Tool[] = [
     tags: ["拍照", "解题", "Google"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "quizlet",
-    name: "Quizlet AI",
-    description: "AI记忆卡片，自动生成测试题，学习更高效",
-    icon: "🎯",
-    url: "https://quizlet.com",
-    category: "learning",
-    tags: ["记忆", "测试", "卡片"],
-    isFree: true,
-    hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "coursera",
@@ -2230,6 +2295,8 @@ export const tools: Tool[] = [
     tags: ["课程", "名校", "证书"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "udemy",
@@ -2241,6 +2308,8 @@ export const tools: Tool[] = [
     tags: ["实战", "技能", "终身"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "brilliant",
@@ -2252,6 +2321,8 @@ export const tools: Tool[] = [
     tags: ["互动", "数学", "游戏"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "photomath",
@@ -2263,6 +2334,8 @@ export const tools: Tool[] = [
     tags: ["拍照", "数学", "步骤"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "wolfram",
@@ -2274,6 +2347,8 @@ export const tools: Tool[] = [
     tags: ["计算", "科学", "数学"],
     isFree: true,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "chegg",
@@ -2285,6 +2360,8 @@ export const tools: Tool[] = [
     tags: ["作业", "辅导", "教科书"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "gradescope",
@@ -2296,6 +2373,8 @@ export const tools: Tool[] = [
     tags: ["批改", "评分", "反馈"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "turnitin",
@@ -2307,6 +2386,8 @@ export const tools: Tool[] = [
     tags: ["查重", "学术", "写作"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI辅助学习",
   },
   {
     id: "perplexity-pro",
@@ -2318,6 +2399,8 @@ export const tools: Tool[] = [
     tags: ["深度", "研究", "多模型"],
     isFree: false,
     hasChinese: false,
+    needVPN: true,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "arc-search",
@@ -2329,6 +2412,8 @@ export const tools: Tool[] = [
     tags: ["浏览器", "总结", "无广告"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "exa",
@@ -2340,6 +2425,8 @@ export const tools: Tool[] = [
     tags: ["语义", "意图", "内容"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "komo",
@@ -2351,6 +2438,8 @@ export const tools: Tool[] = [
     tags: ["隐私", "无追踪", "搜索"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "andisearch",
@@ -2362,6 +2451,8 @@ export const tools: Tool[] = [
     tags: ["对话", "答案", "助手"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "iask",
@@ -2373,6 +2464,8 @@ export const tools: Tool[] = [
     tags: ["客观", "无偏见", "搜索"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "phind",
@@ -2384,28 +2477,8 @@ export const tools: Tool[] = [
     tags: ["开发者", "技术", "精准"],
     isFree: true,
     hasChinese: false,
-  },
-  {
-    id: "devv",
-    name: "Devv",
-    description: "AI开发者搜索，中文技术问答，精准高效",
-    icon: "🔧",
-    url: "https://devv.ai",
-    category: "search",
-    tags: ["开发者", "中文", "技术"],
-    isFree: true,
-    hasChinese: true,
-  },
-  {
-    id: "metaso",
-    name: "秘塔AI搜索",
-    description: "国产AI搜索，结构化回答，学术搜索强",
-    icon: "🔍",
-    url: "https://metaso.cn",
-    category: "search",
-    tags: ["国产", "学术", "结构化"],
-    isFree: true,
-    hasChinese: true,
+    needVPN: true,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "baidu-ai-search",
@@ -2417,6 +2490,8 @@ export const tools: Tool[] = [
     tags: ["百度", "国产", "聚合"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "sogou-ai",
@@ -2428,6 +2503,8 @@ export const tools: Tool[] = [
     tags: ["搜狗", "微信", "中文"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "chatglm-search",
@@ -2439,6 +2516,8 @@ export const tools: Tool[] = [
     tags: ["智谱", "学术", "技术"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI智能搜索",
   },
   {
     id: "replika",
@@ -2450,6 +2529,8 @@ export const tools: Tool[] = [
     tags: ["陪伴", "情感", "心理"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "character-life",
@@ -2461,6 +2542,8 @@ export const tools: Tool[] = [
     tags: ["角色", "扮演", "娱乐"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "pi-life",
@@ -2472,6 +2555,8 @@ export const tools: Tool[] = [
     tags: ["生活", "温暖", "建议"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "cleo",
@@ -2483,6 +2568,8 @@ export const tools: Tool[] = [
     tags: ["理财", "预算", "财务"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "mint",
@@ -2494,6 +2581,8 @@ export const tools: Tool[] = [
     tags: ["财务", "预算", "提醒"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "robinhood",
@@ -2505,6 +2594,8 @@ export const tools: Tool[] = [
     tags: ["投资", "股票", "分析"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tripnotes",
@@ -2516,6 +2607,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "规划", "推荐"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "wanderlog",
@@ -2527,6 +2620,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "地图", "协作"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "hopper",
@@ -2538,6 +2633,8 @@ export const tools: Tool[] = [
     tags: ["预测", "机票", "省钱"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "kayak",
@@ -2549,6 +2646,8 @@ export const tools: Tool[] = [
     tags: ["比价", "机票", "酒店"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "noom",
@@ -2560,6 +2659,8 @@ export const tools: Tool[] = [
     tags: ["健康", "减重", "心理"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "myfitnesspal",
@@ -2571,6 +2672,8 @@ export const tools: Tool[] = [
     tags: ["饮食", "卡路里", "营养"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "calm",
@@ -2582,6 +2685,8 @@ export const tools: Tool[] = [
     tags: ["冥想", "睡眠", "放松"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "headspace",
@@ -2593,6 +2698,8 @@ export const tools: Tool[] = [
     tags: ["冥想", "正念", "压力"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "youtrip",
@@ -2604,6 +2711,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "规划", "本地"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "rome2rio",
@@ -2615,6 +2724,8 @@ export const tools: Tool[] = [
     tags: ["路线", "交通", "全球"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "packpoint",
@@ -2626,6 +2737,8 @@ export const tools: Tool[] = [
     tags: ["打包", "行李", "天气"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "spotify-ai",
@@ -2637,6 +2750,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "推荐", "歌单"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "netflix-ai",
@@ -2648,6 +2763,8 @@ export const tools: Tool[] = [
     tags: ["影视", "推荐", "观影"],
     isFree: false,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "amazon-alexa",
@@ -2659,6 +2776,8 @@ export const tools: Tool[] = [
     tags: ["语音", "智能家居", "助手"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "google-assistant",
@@ -2670,6 +2789,8 @@ export const tools: Tool[] = [
     tags: ["语音", "多语言", "查询"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "siri",
@@ -2681,6 +2802,8 @@ export const tools: Tool[] = [
     tags: ["语音", "Apple", "隐私"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xiaomi-xiaoai",
@@ -2692,6 +2815,8 @@ export const tools: Tool[] = [
     tags: ["语音", "小米", "智能家居"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tianmao-jingling",
@@ -2703,6 +2828,8 @@ export const tools: Tool[] = [
     tags: ["语音", "购物", "阿里"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tencent-xiaowei",
@@ -2714,6 +2841,8 @@ export const tools: Tool[] = [
     tags: ["语音", "腾讯", "音乐"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "meituan-xiaomei",
@@ -2725,6 +2854,8 @@ export const tools: Tool[] = [
     tags: ["语音", "外卖", "本地"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "dianping-ai",
@@ -2736,6 +2867,8 @@ export const tools: Tool[] = [
     tags: ["餐厅", "推荐", "美食"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tongcheng-ai",
@@ -2747,6 +2880,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "机票", "酒店"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "qunar-ai",
@@ -2758,6 +2893,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "比价", "智能"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ctrip-ai",
@@ -2769,6 +2906,8 @@ export const tools: Tool[] = [
     tags: ["旅行", "景点", "推荐"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "meituan-waimai-ai",
@@ -2780,6 +2919,8 @@ export const tools: Tool[] = [
     tags: ["外卖", "点餐", "优惠"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "eleme-ai",
@@ -2791,6 +2932,8 @@ export const tools: Tool[] = [
     tags: ["外卖", "配送", "美食"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "dida-ai",
@@ -2802,6 +2945,8 @@ export const tools: Tool[] = [
     tags: ["出行", "拼车", "路线"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "gaode-ai",
@@ -2813,6 +2958,8 @@ export const tools: Tool[] = [
     tags: ["导航", "路线", "路况"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "baidu-map-ai",
@@ -2824,6 +2971,8 @@ export const tools: Tool[] = [
     tags: ["地图", "导航", "周边"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tencent-map-ai",
@@ -2835,6 +2984,8 @@ export const tools: Tool[] = [
     tags: ["地图", "微信", "出行"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "jd-ai",
@@ -2846,6 +2997,8 @@ export const tools: Tool[] = [
     tags: ["购物", "推荐", "客服"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "taobao-ai",
@@ -2857,6 +3010,8 @@ export const tools: Tool[] = [
     tags: ["购物", "搜索", "推荐"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "pinduoduo-ai",
@@ -2868,6 +3023,8 @@ export const tools: Tool[] = [
     tags: ["购物", "团购", "优惠"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xianyu-ai",
@@ -2879,6 +3036,8 @@ export const tools: Tool[] = [
     tags: ["二手", "定价", "识别"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "zhihu-ai",
@@ -2890,6 +3049,8 @@ export const tools: Tool[] = [
     tags: ["问答", "知识", "创作"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "weibo-ai",
@@ -2901,6 +3062,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "热搜", "写作"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "douyin-ai",
@@ -2912,6 +3075,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "视频", "特效"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "kuaishou-ai",
@@ -2923,6 +3088,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "视频", "剪辑"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "bilibili-ai",
@@ -2934,6 +3101,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "视频", "弹幕"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "netease-music-ai",
@@ -2945,6 +3114,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "推荐", "歌单"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "qq-music-ai",
@@ -2956,6 +3127,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "音效", "歌词"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "kugou-ai",
@@ -2967,6 +3140,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "音效", "识曲"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "kuwo-ai",
@@ -2978,6 +3153,8 @@ export const tools: Tool[] = [
     tags: ["音乐", "HiFi", "歌单"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ximalaya-ai",
@@ -2989,6 +3166,8 @@ export const tools: Tool[] = [
     tags: ["音频", "有声书", "播客"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "qingting-ai",
@@ -3000,6 +3179,8 @@ export const tools: Tool[] = [
     tags: ["音频", "电台", "有声"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "lizhi-ai",
@@ -3011,6 +3192,8 @@ export const tools: Tool[] = [
     tags: ["音频", "播客", "直播"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "dedao-ai",
@@ -3022,6 +3205,8 @@ export const tools: Tool[] = [
     tags: ["知识", "课程", "学习"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xuexiqiangguo-ai",
@@ -3033,6 +3218,8 @@ export const tools: Tool[] = [
     tags: ["学习", "推送", "记录"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "toutiao-ai",
@@ -3044,6 +3231,8 @@ export const tools: Tool[] = [
     tags: ["新闻", "推荐", "热点"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "sina-ai",
@@ -3055,6 +3244,8 @@ export const tools: Tool[] = [
     tags: ["新闻", "财经", "体育"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "sohu-ai",
@@ -3066,6 +3257,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "新闻", "视频"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "netease-ai",
@@ -3077,6 +3270,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "娱乐", "游戏"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ifeng-ai",
@@ -3088,6 +3283,8 @@ export const tools: Tool[] = [
     tags: ["新闻", "国际", "深度"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "yicai-ai",
@@ -3099,6 +3296,8 @@ export const tools: Tool[] = [
     tags: ["财经", "市场", "投资"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "caixin-ai",
@@ -3110,6 +3309,8 @@ export const tools: Tool[] = [
     tags: ["财经", "调查", "数据"],
     isFree: false,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "36kr-ai",
@@ -3121,6 +3322,8 @@ export const tools: Tool[] = [
     tags: ["科技", "创业", "投资"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "pingwest-ai",
@@ -3132,6 +3335,8 @@ export const tools: Tool[] = [
     tags: ["科技", "评测", "行业"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "geekpark-ai",
@@ -3143,6 +3348,8 @@ export const tools: Tool[] = [
     tags: ["科技", "产品", "创新"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "huxiu-ai",
@@ -3154,6 +3361,8 @@ export const tools: Tool[] = [
     tags: ["商业", "分析", "创业"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "latepost-ai",
@@ -3165,6 +3374,8 @@ export const tools: Tool[] = [
     tags: ["商业", "长文", "洞察"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "guokr-ai",
@@ -3176,6 +3387,8 @@ export const tools: Tool[] = [
     tags: ["科普", "科学", "趣味"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "zhihu-daily-ai",
@@ -3187,6 +3400,8 @@ export const tools: Tool[] = [
     tags: ["精选", "好文", "推荐"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "douban-ai",
@@ -3198,6 +3413,8 @@ export const tools: Tool[] = [
     tags: ["书影音", "评分", "兴趣"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xiaohongshu-content",
@@ -3209,6 +3426,8 @@ export const tools: Tool[] = [
     tags: ["推荐", "种草", "生活"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "keep-ai",
@@ -3220,6 +3439,8 @@ export const tools: Tool[] = [
     tags: ["健身", "训练", "饮食"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "pingan-ai",
@@ -3231,6 +3452,8 @@ export const tools: Tool[] = [
     tags: ["健康", "医疗", "保险"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ali-health-ai",
@@ -3242,6 +3465,8 @@ export const tools: Tool[] = [
     tags: ["健康", "药品", "问诊"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "jd-health-ai",
@@ -3253,6 +3478,8 @@ export const tools: Tool[] = [
     tags: ["健康", "问诊", "配送"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "dingxiang-ai",
@@ -3264,6 +3491,8 @@ export const tools: Tool[] = [
     tags: ["医疗", "科普", "用药"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "haodf-ai",
@@ -3275,6 +3504,8 @@ export const tools: Tool[] = [
     tags: ["医疗", "问诊", "医院"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "chunyu-ai",
@@ -3286,6 +3517,8 @@ export const tools: Tool[] = [
     tags: ["医疗", "问诊", "档案"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "weiyi-ai",
@@ -3297,6 +3530,8 @@ export const tools: Tool[] = [
     tags: ["医疗", "问诊", "挂号"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "guahao-ai",
@@ -3308,6 +3543,8 @@ export const tools: Tool[] = [
     tags: ["挂号", "医院", "专家"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "babytree-ai",
@@ -3319,6 +3556,8 @@ export const tools: Tool[] = [
     tags: ["育儿", "孕期", "知识"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "mama-ai",
@@ -3330,6 +3569,8 @@ export const tools: Tool[] = [
     tags: ["母婴", "育儿", "社区"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "meiyan-ai",
@@ -3341,6 +3582,8 @@ export const tools: Tool[] = [
     tags: ["健康", "经期", "备孕"],
     isFree: true,
     hasChinese: true,
+    needVPN: true,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "dayima-ai",
@@ -3352,6 +3595,8 @@ export const tools: Tool[] = [
     tags: ["经期", "健康", "社区"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "xiaoice-life",
@@ -3363,6 +3608,8 @@ export const tools: Tool[] = [
     tags: ["陪伴", "情感", "文艺"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "turing-robot",
@@ -3374,6 +3621,8 @@ export const tools: Tool[] = [
     tags: ["对话", "客服", "机器人"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "unit-ai",
@@ -3385,6 +3634,8 @@ export const tools: Tool[] = [
     tags: ["对话", "客服", "语音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tencent-youtu",
@@ -3396,6 +3647,8 @@ export const tools: Tool[] = [
     tags: ["图像", "人脸", "OCR"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "face-plus-plus",
@@ -3407,6 +3660,8 @@ export const tools: Tool[] = [
     tags: ["人脸", "检测", "比对"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "sense-time",
@@ -3418,6 +3673,8 @@ export const tools: Tool[] = [
     tags: ["视觉", "人脸", "分析"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "yitu-ai",
@@ -3429,6 +3686,8 @@ export const tools: Tool[] = [
     tags: ["视觉", "医疗", "影像"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "megvii",
@@ -3440,6 +3699,8 @@ export const tools: Tool[] = [
     tags: ["人脸", "城市", "物流"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "cloudwalk",
@@ -3451,6 +3712,8 @@ export const tools: Tool[] = [
     tags: ["人脸", "金融", "交通"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "iflytek-voice",
@@ -3462,6 +3725,8 @@ export const tools: Tool[] = [
     tags: ["语音", "识别", "合成"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "baidu-speech",
@@ -3473,6 +3738,8 @@ export const tools: Tool[] = [
     tags: ["语音", "识别", "唤醒"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ali-speech",
@@ -3484,6 +3751,8 @@ export const tools: Tool[] = [
     tags: ["语音", "识别", "声纹"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tencent-voice",
@@ -3495,6 +3764,8 @@ export const tools: Tool[] = [
     tags: ["语音", "识别", "评测"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "huawei-cloud-ai",
@@ -3506,6 +3777,8 @@ export const tools: Tool[] = [
     tags: ["云", "ModelArts", "盘古"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "baidu-cloud-ai",
@@ -3517,6 +3790,8 @@ export const tools: Tool[] = [
     tags: ["云", "平台", "千帆"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "ali-cloud-ai",
@@ -3528,6 +3803,8 @@ export const tools: Tool[] = [
     tags: ["云", "通义", "机器学习"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "tencent-cloud-ai",
@@ -3539,6 +3816,8 @@ export const tools: Tool[] = [
     tags: ["云", "混元", "TI"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "jd-cloud-ai",
@@ -3550,6 +3829,8 @@ export const tools: Tool[] = [
     tags: ["云", "言犀", "客服"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "sina-cloud-ai",
@@ -3561,6 +3842,8 @@ export const tools: Tool[] = [
     tags: ["云", "分析", "推荐"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "netease-cloud-ai",
@@ -3572,6 +3855,8 @@ export const tools: Tool[] = [
     tags: ["云", "音乐", "分析"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "uclound-ai",
@@ -3583,6 +3868,8 @@ export const tools: Tool[] = [
     tags: ["云", "图像", "分析"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "qingcloud-ai",
@@ -3594,6 +3881,8 @@ export const tools: Tool[] = [
     tags: ["云", "容器", "机器学习"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "kingsoft-cloud-ai",
@@ -3605,6 +3894,8 @@ export const tools: Tool[] = [
     tags: ["云", "视频", "办公"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合日常生活场景",
   },
   {
     id: "baidu-translate",
@@ -3616,6 +3907,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "多语言", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "youdao-translate",
@@ -3627,6 +3920,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "词典", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "tencent-translate",
@@ -3638,6 +3933,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "实时", "语音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "ali-translate",
@@ -3649,6 +3946,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "电商", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "sogou-translate",
@@ -3660,6 +3959,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "文档", "语音"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "caiyun-translate",
@@ -3671,6 +3972,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "网页", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "volcano-translate",
@@ -3682,6 +3985,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "视频", "文档"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "papago",
@@ -3693,6 +3998,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "亚洲", "Naver"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "reverso",
@@ -3704,6 +4011,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "语境", "语法"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "linguee",
@@ -3715,6 +4024,8 @@ export const tools: Tool[] = [
     tags: ["词典", "例句", "术语"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "wordreference",
@@ -3726,6 +4037,8 @@ export const tools: Tool[] = [
     tags: ["词典", "多语言", "论坛"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "dict-cn",
@@ -3737,6 +4050,8 @@ export const tools: Tool[] = [
     tags: ["词典", "例句", "词汇"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "iciba",
@@ -3748,6 +4063,8 @@ export const tools: Tool[] = [
     tags: ["词典", "翻译", "英语"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "lingoes",
@@ -3759,6 +4076,8 @@ export const tools: Tool[] = [
     tags: ["词典", "取词", "集成"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "eudic",
@@ -3770,6 +4089,8 @@ export const tools: Tool[] = [
     tags: ["词典", "背单词", "多词典"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "moji-dict",
@@ -3781,6 +4102,8 @@ export const tools: Tool[] = [
     tags: ["日语", "词典", "学习"],
     isFree: true,
     hasChinese: true,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "gengo",
@@ -3792,6 +4115,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "人工", "专业"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "smartcat",
@@ -3803,6 +4128,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "协作", "CAT"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "memoq",
@@ -3814,6 +4141,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "术语", "质量"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "trados",
@@ -3825,6 +4154,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "专业", "术语库"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "omegat",
@@ -3836,6 +4167,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "开源", "免费"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "poedit",
@@ -3847,6 +4180,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "编辑器", "本地化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "crowdin",
@@ -3858,6 +4193,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "协作", "自动化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "localize",
@@ -3869,6 +4206,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "网站", "应用"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "phrase",
@@ -3880,6 +4219,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "管理", "自动化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "transifex",
@@ -3891,6 +4232,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "开源", "协作"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "weblate",
@@ -3902,6 +4245,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "开源", "Git"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "pontoon",
@@ -3913,6 +4258,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "Mozilla", "Web"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "tolgee",
@@ -3924,6 +4271,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "开发者", "开源"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "inlang",
@@ -3935,6 +4284,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "Git", "开发者"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "simplelocalize",
@@ -3946,6 +4297,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "CLI", "快速"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "locize",
@@ -3957,6 +4310,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "实时", "CDN"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "lokalise",
@@ -3968,6 +4323,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "移动", "游戏"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "applanga",
@@ -3979,6 +4336,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "移动", "自动化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "onesky",
@@ -3990,6 +4349,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "移动", "游戏"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "textunited",
@@ -4001,6 +4362,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "协作", "质量"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "memsource",
@@ -4012,6 +4375,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "企业", "自动化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "wordfast",
@@ -4023,6 +4388,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "CAT", "术语"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "fluency-now",
@@ -4034,6 +4401,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "CAT", "免费"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "matecat",
@@ -4045,6 +4414,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "免费", "协作"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "smartling",
@@ -4056,6 +4427,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "企业", "管理"],
     isFree: false,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "xtm-cloud",
@@ -4067,6 +4440,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "云端", "协作"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "wordbee",
@@ -4078,6 +4453,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "管理", "自动化"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "redokun",
@@ -4089,6 +4466,8 @@ export const tools: Tool[] = [
     tags: ["本地化", "InDesign", "协作"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "doc translator",
@@ -4100,6 +4479,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "文档", "免费"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "onlinedoctranslator",
@@ -4111,6 +4492,8 @@ export const tools: Tool[] = [
     tags: ["翻译", "文档", "格式"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "deftpdf",
@@ -4122,6 +4505,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "翻译", "编辑"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "pdftranslator",
@@ -4133,6 +4518,8 @@ export const tools: Tool[] = [
     tags: ["PDF", "翻译", "格式"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
   },
   {
     id: "doctranslator",
@@ -4144,5 +4531,204 @@ export const tools: Tool[] = [
     tags: ["翻译", "文档", "免费"],
     isFree: true,
     hasChinese: false,
+    needVPN: false,
+    recommendation: "适合AI提升办公效率",
+  },
+
+  // AI资讯动态
+  {
+    id: "36kr-ai",
+    name: "36氪AI频道",
+    description: "国内头部科技媒体的AI专区，报道AI行业融资、产品发布、大厂动态，适合了解商业化进展",
+    icon: "📊",
+    url: "https://36kr.com/information/AI",
+    category: "news",
+    tags: ["行业", "融资", "商业"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "了解AI行业商业动态首选",
+  },
+  {
+    id: "jiqizhixin",
+    name: "机器之心",
+    description: "国内最专业的AI媒体，深度解读论文、技术趋势和产业应用，适合想深入了解AI的用户",
+    icon: "🤖",
+    url: "https://www.jiqizhixin.com",
+    category: "news",
+    tags: ["深度", "论文", "技术"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合深度了解AI技术趋势",
+  },
+  {
+    id: "leiphone",
+    name: "雷峰网AI",
+    description: "关注AI前沿技术与应用落地，大模型评测、AI产品体验报告丰富",
+    icon: "⚡",
+    url: "https://www.leiphone.com",
+    category: "news",
+    tags: ["评测", "前沿", "应用"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合看AI产品评测和体验",
+  },
+  {
+    id: "aihub",
+    name: "AI工具集",
+    description: "专注收录和评测AI工具的中文平台，每天更新新工具，帮你发现最新最好用的AI产品",
+    icon: "🧰",
+    url: "https://ai-bot.cn",
+    category: "news",
+    tags: ["工具", "评测", "合集"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "发现最新AI工具的好去处",
+  },
+  {
+    id: "sspai-ai",
+    name: "少数派AI专栏",
+    description: "高质量的AI工具教程和使用技巧分享，文章写得通俗易懂，适合新手入门",
+    icon: "📱",
+    url: "https://sspai.com/tag/AI",
+    category: "news",
+    tags: ["教程", "技巧", "入门"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "AI小白入门教程写得最好",
+  },
+  {
+    id: "the-verge-ai",
+    name: "The Verge AI",
+    description: "全球顶级科技媒体的AI报道，第一时间跟进OpenAI、Google、Meta等大厂动态",
+    icon: "🌐",
+    url: "https://www.theverge.com/ai-artificial-intelligence",
+    category: "news",
+    tags: ["国际", "大厂", "首发"],
+    isFree: true,
+    hasChinese: false,
+    needVPN: true,
+    recommendation: "看国际AI大厂一手消息",
+  },
+  {
+    id: "techcrunch-ai",
+    name: "TechCrunch AI",
+    description: "全球知名创投媒体的AI板块，关注AI创业公司融资和产品发布",
+    icon: "💰",
+    url: "https://techcrunch.com/category/artificial-intelligence/",
+    category: "news",
+    tags: ["创业", "融资", "国际"],
+    isFree: true,
+    hasChinese: false,
+    needVPN: true,
+    recommendation: "关注全球AI创业和融资",
+  },
+  {
+    id: "aibase",
+    name: "AIbase",
+    description: "AI产品发现和导航平台，收录全球AI工具，按场景分类方便查找，更新及时",
+    icon: "🗂️",
+    url: "https://top.aibase.com",
+    category: "news",
+    tags: ["导航", "发现", "全球"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "快速发现全球新AI产品",
+  },
+  {
+    id: "huggingface-blog",
+    name: "Hugging Face博客",
+    description: "AI开源社区官方博客，发布最新模型、数据集和技术教程，开源AI领域风向标",
+    icon: "🤗",
+    url: "https://huggingface.co/blog",
+    category: "news",
+    tags: ["开源", "模型", "社区"],
+    isFree: true,
+    hasChinese: false,
+    needVPN: true,
+    recommendation: "了解AI开源社区最新动态",
+  },
+  {
+    id: "ainews-wechat",
+    name: "量子位",
+    description: "微信生态最活跃的AI自媒体之一，每天推送AI圈大事件，语言轻松易懂",
+    icon: "⚛️",
+    url: "https://www.qbitai.com",
+    category: "news",
+    tags: ["轻松", "日报", "大事件"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "每天5分钟了解AI圈大事",
+  },
+  {
+    id: "xinzhiyuan",
+    name: "新智元",
+    description: "AI领域知名媒体，聚焦大模型发展、AI政策解读和行业深度分析",
+    icon: "🧠",
+    url: "https://www.ai-era.com",
+    category: "news",
+    tags: ["大模型", "政策", "深度"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "适合关注AI政策和大模型",
+  },
+  {
+    id: "toolify",
+    name: "Toolify.ai",
+    description: "全球最大的AI工具目录之一，按月追踪AI工具排行榜和流量变化",
+    icon: "📈",
+    url: "https://www.toolify.ai",
+    category: "news",
+    tags: ["排行", "流量", "全球"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "看哪些AI工具最火最多人用",
+  },
+  {
+    id: "bensbites",
+    name: "Ben's Bites",
+    description: "海外最受欢迎的AI日报Newsletter，每天精选AI新闻，简短好读",
+    icon: "🍔",
+    url: "https://bensbites.beehiiv.com",
+    category: "news",
+    tags: ["日报", "精选", "英文"],
+    isFree: true,
+    hasChinese: false,
+    needVPN: true,
+    recommendation: "海外AI圈人人必读的日报",
+  },
+  {
+    id: "aicpb",
+    name: "AI产品榜",
+    description: "专注追踪国内外AI产品排名和用户增长数据，用数据说话，告诉你哪些AI工具真的好用",
+    icon: "🏆",
+    url: "https://aicpb.com",
+    category: "news",
+    tags: ["排行", "数据", "国产"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "看国产AI产品哪个最火",
+  },
+  {
+    id: "followin-ai",
+    name: "Followin AI",
+    description: "AI资讯聚合阅读器，自动汇总多个来源的AI新闻，支持自定义关注主题",
+    icon: "📡",
+    url: "https://followin.io/ai",
+    category: "news",
+    tags: ["聚合", "订阅", "个性化"],
+    isFree: true,
+    hasChinese: true,
+    needVPN: false,
+    recommendation: "一站式看完所有AI资讯",
   },
 ];
