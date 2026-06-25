@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import ToolCard from "@/components/ToolCard";
 import TrafficModal from "@/components/TrafficModal";
 import SubmitToolModal from "@/components/SubmitToolModal";
+import HomeJsonLd from "@/components/HomeJsonLd";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useDarkMode } from "@/hooks/useDarkMode";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
@@ -81,6 +82,7 @@ export default function Home() {
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950">
+      <HomeJsonLd />
       <Sidebar
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}

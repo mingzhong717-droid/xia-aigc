@@ -41,7 +41,7 @@ for (const id of toolIds) {
     <loc>${BASE_URL}/tool/${id}/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 `;
 }

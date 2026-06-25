@@ -14,28 +14,50 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "小AIGC - AI工具导航站 | 精选300+实用AI工具",
-  description: "小AIGC是面向AI小白的工具导航站，精选300+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等分类，帮你轻松找到最适合的AI工具。",
-  keywords: "AI工具,AI导航,ChatGPT,AI写作,AI绘画,AI视频,人工智能,AI工具推荐,AI工具大全,免费AI工具,国产AI",
+  title: {
+    default: "小AIGC - AI工具导航站 | 精选200+实用AI工具",
+    template: "%s | 小AIGC",
+  },
+  description: "小AIGC是面向AI新手的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等12大分类，帮你轻松找到最适合的AI工具。每周更新，免费无广告。",
+  keywords: "AI工具,AI导航,AI工具导航,ChatGPT,AI写作,AI绘画,AI视频,人工智能,AI工具推荐,AI工具大全,免费AI工具,国产AI,AI对话,AI助手,AIGC,Midjourney,Stable Diffusion,文心一言,通义千问,Kimi",
+  authors: [{ name: "小AIGC" }],
+  creator: "小AIGC",
+  publisher: "小AIGC",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://mingzhong717-droid.github.io/xia-aigc"),
   openGraph: {
-    title: "小AIGC - AI工具导航站",
-    description: "精选300+实用AI工具，让每个人都能轻松用上人工智能",
+    title: "小AIGC - AI工具导航站 | 精选200+实用AI工具",
+    description: "面向AI新手的工具导航站，精选200+实用AI工具，涵盖12大分类，让每个人都能轻松用上人工智能",
     siteName: "小AIGC",
     locale: "zh_CN",
     type: "website",
+    url: "https://mingzhong717-droid.github.io/xia-aigc/",
   },
   twitter: {
     card: "summary_large_image",
     title: "小AIGC - AI工具导航站",
-    description: "精选300+实用AI工具，让每个人都能轻松用上人工智能",
+    description: "精选200+实用AI工具，让每个人都能轻松用上人工智能",
+    creator: "@xiaaigc",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   alternates: {
     canonical: "https://mingzhong717-droid.github.io/xia-aigc/",
   },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -51,6 +73,13 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="icon" href="/xia-aigc/favicon.ico" />
+        <link rel="apple-touch-icon" href="/xia-aigc/favicon.ico" />
+        <meta name="theme-color" content="#4f46e5" />
+        <meta name="msapplication-TileColor" content="#4f46e5" />
+        {/* Baidu SEO verification - 替换为你的百度站长验证码 */}
+        {/* <meta name="baidu-site-verification" content="YOUR_CODE" /> */}
+        {/* Google Search Console verification - 替换为你的验证码 */}
+        {/* <meta name="google-site-verification" content="YOUR_CODE" /> */}
       </head>
       <body className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
         {children}

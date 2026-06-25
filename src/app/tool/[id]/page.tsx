@@ -20,15 +20,24 @@ export async function generateMetadata({ params }: Props) {
   const category = categories.find((c) => c.id === tool.category);
 
   return {
-    title: `${tool.name} - ${tool.recommendation} | 小AIGC`,
+    title: `${tool.name} - ${tool.recommendation}`,
     description: `${tool.description}。${tool.recommendation}。${tool.isFree ? "免费使用" : "付费工具"}${tool.hasChinese ? "，支持中文" : ""}${tool.needVPN ? "，需要翻墙" : ""}。`,
-    keywords: `${tool.name},${tool.tags.join(",")},${category?.name || "AI工具"},AI工具推荐`,
+    keywords: `${tool.name},${tool.tags.join(",")},${category?.name || "AI工具"},AI工具推荐,AI工具`,
     openGraph: {
-      title: `${tool.name} - ${tool.recommendation}`,
+      title: `${tool.name} - ${tool.recommendation} | 小AIGC`,
       description: tool.description,
       siteName: "小AIGC",
       locale: "zh_CN",
       type: "article",
+      url: `https://mingzhong717-droid.github.io/xia-aigc/tool/${id}/`,
+    },
+    twitter: {
+      card: "summary" as const,
+      title: `${tool.name} - ${tool.recommendation}`,
+      description: tool.description,
+    },
+    alternates: {
+      canonical: `https://mingzhong717-droid.github.io/xia-aigc/tool/${id}/`,
     },
   };
 }
