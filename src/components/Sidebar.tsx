@@ -2,6 +2,7 @@
 
 import { categories } from "@/data/tools";
 import { cn } from "@/lib/utils";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface SidebarProps {
   activeCategory: string;
@@ -16,6 +17,7 @@ export default function Sidebar({
   toolCounts,
   onOpenTraffic,
 }: SidebarProps) {
+  const { favorites } = useFavorites();
   return (
     <aside className="w-64 h-screen sticky top-0 overflow-y-auto border-r border-zinc-200/80 bg-white/80 backdrop-blur-xl dark:bg-zinc-900/80 dark:border-zinc-800/80">
       <div className="p-4">
@@ -48,6 +50,24 @@ export default function Sidebar({
             <span className="ml-auto text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
               {Object.values(toolCounts).reduce((a, b) => a + b, 0)}
             </span>
+          </button>
+
+          <button
+            onClick={() => onCategoryChange("favorites")}
+            className={cn(
+              "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left",
+              activeCategory === "favorites"
+                ? "bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-md shadow-amber-500/20"
+                : "text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+            )}
+          >
+            <span className="text-lg">⭐</span>
+            <span>我的收藏</span>
+            {favorites.length > 0 && (
+              <span className="ml-auto text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
+                {favorites.length}
+              </span>
+            )}
           </button>
 
           {categories.map((cat) => (

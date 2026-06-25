@@ -6,12 +6,14 @@ import Sidebar from "@/components/Sidebar";
 import ToolCard from "@/components/ToolCard";
 import TrafficModal from "@/components/TrafficModal";
 import { cn } from "@/lib/utils";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showTrafficModal, setShowTrafficModal] = useState(false);
   const [trafficType, setTrafficType] = useState<"wechat" | "douyin" | "xiaohongshu" | "group">("wechat");
+  const { favorites } = useFavorites();
 
   const toolCounts = categories.reduce((acc, cat) => {
     acc[cat.id] = tools.filter((t) => t.category === cat.id).length;
@@ -19,8 +21,14 @@ export default function Home() {
   }, {} as Record<string, number>);
 
   const filteredTools = tools.filter((tool) => {
-    const matchesCategory =
-      activeCategory === "all" || tool.category === activeCategory;
+    let matchesCategory: boolean;
+    if (activeCategory === "all") {
+      matchesCategory = true;
+    } else if (activeCategory === "favorites") {
+      matchesCategory = favorites.includes(tool.id);
+    } else {
+      matchesCategory = tool.category === activeCategory;
+    }
     const matchesSearch =
       searchQuery === "" ||
       tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -34,11 +42,15 @@ export default function Home() {
   const activeCategoryName =
     activeCategory === "all"
       ? "全部工具"
+      : activeCategory === "favorites"
+      ? "我的收藏"
       : categories.find((c) => c.id === activeCategory)?.name || "全部工具";
 
   const activeCategoryDesc =
     activeCategory === "all"
       ? "精选实用的AI工具，帮你轻松上手人工智能"
+      : activeCategory === "favorites"
+      ? `已收藏 ${favorites.length} 个工具`
       : categories.find((c) => c.id === activeCategory)?.description || "";
 
   const openTraffic = (type: "wechat" | "douyin" | "xiaohongshu" | "group") => {
