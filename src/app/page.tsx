@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, memo } from "react";
 import { tools, categories } from "@/data/tools";
 import Sidebar from "@/components/Sidebar";
 import ToolCard from "@/components/ToolCard";
@@ -12,6 +12,8 @@ import { useDarkMode } from "@/hooks/useDarkMode";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
 const HOT_SEARCHES = ["ChatGPT", "AI绘画", "写作", "PPT", "视频", "免费"];
+
+const MemoToolCard = memo(ToolCard);
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -247,7 +249,7 @@ export default function Home() {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {visibleItems.map((tool, index) => (
-                  <ToolCard
+                  <MemoToolCard
                     key={`${tool.id}-${index}`}
                     tool={tool}
                     index={index}

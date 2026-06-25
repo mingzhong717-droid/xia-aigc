@@ -31,7 +31,9 @@ function HighlightText({ text, query }: { text: string; query?: string }) {
   );
 }
 
-export default function ToolCard({ tool, index = 0, searchQuery }: ToolCardProps) {
+import React from "react";
+
+const ToolCard = React.memo(function ToolCard({ tool, index = 0, searchQuery }: ToolCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleShare = (e: React.MouseEvent) => {
@@ -136,4 +138,6 @@ export default function ToolCard({ tool, index = 0, searchQuery }: ToolCardProps
       </Link>
     </div>
   );
-}
+});
+
+export default ToolCard;

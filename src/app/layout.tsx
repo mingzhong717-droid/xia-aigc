@@ -74,8 +74,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="icon" href="/xia-aigc/favicon.ico" />
         <link rel="apple-touch-icon" href="/xia-aigc/favicon.ico" />
+        <link rel="manifest" href="/xia-aigc/manifest.json" />
         <meta name="theme-color" content="#4f46e5" />
         <meta name="msapplication-TileColor" content="#4f46e5" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="小AIGC" />
         {/* Baidu SEO verification - 替换为你的百度站长验证码 */}
         {/* <meta name="baidu-site-verification" content="YOUR_CODE" /> */}
         {/* Google Search Console verification - 替换为你的验证码 */}
@@ -108,6 +112,22 @@ export default function RootLayout({
               var s = document.getElementsByTagName("script")[0];
               s.parentNode.insertBefore(hm, s);
             })();
+          `}
+        </Script>
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/xia-aigc/sw.js').then(
+                  function(registration) {
+                    console.log('ServiceWorker registration successful');
+                  },
+                  function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                  }
+                );
+              });
+            }
           `}
         </Script>
       </body>
