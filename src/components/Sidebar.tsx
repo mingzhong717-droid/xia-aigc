@@ -42,34 +42,70 @@ export default function Sidebar({
   };
 
   const sidebarContent = (
-    <div className="p-4">
-      {/* Logo */}
-      <div className="flex items-center gap-3 mb-8 px-2">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-indigo-500/20">
+    <div className="p-3">
+      {/* Logo - compact */}
+      <div className="flex items-center gap-2.5 mb-6 px-2 py-1">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm shadow-md shadow-indigo-500/20">
           🤖
         </div>
         <div>
-          <h1 className="font-bold text-lg text-zinc-900 dark:text-white leading-tight">
+          <h1 className="font-bold text-base text-zinc-900 dark:text-white leading-tight">
             人人AI
           </h1>
-          <p className="text-xs text-zinc-400">AI工具，一找就用</p>
+          <p className="text-[10px] text-zinc-400">AI工具，一找就用</p>
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="space-y-0.5">
+      {/* Quick Nav - 编辑推荐/热门/最新/排行榜 */}
+      <div className="mb-4 px-1">
+        <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-2">
+          快捷导航
+        </p>
+        <div className="grid grid-cols-2 gap-1.5">
+          <button
+            onClick={() => handleCategoryClick("all")}
+            className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:hover:bg-amber-900/30 transition-colors"
+          >
+            <span>⭐</span> 编辑推荐
+          </button>
+          <a
+            href="/rankings/"
+            className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium text-rose-600 bg-rose-50 hover:bg-rose-100 dark:bg-rose-900/20 dark:text-rose-400 dark:hover:bg-rose-900/30 transition-colors"
+          >
+            <span>🏆</span> 排行榜
+          </a>
+          <a
+            href="/news/"
+            className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 transition-colors"
+          >
+            <span>📡</span> 最新动态
+          </a>
+          <button
+            onClick={() => handleCategoryClick("favorites")}
+            className="flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/20 dark:text-purple-400 dark:hover:bg-purple-900/30 transition-colors"
+          >
+            <span>💜</span> 最近浏览
+          </button>
+        </div>
+      </div>
+
+      {/* Category Navigation - lightweight */}
+      <nav className="space-y-0.5 mb-4">
+        <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-3">
+          工具分类
+        </p>
         <button
           onClick={() => handleCategoryClick("all")}
           className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left",
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all text-left",
             activeCategory === "all"
-              ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md shadow-indigo-500/20"
-              : "text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+              ? "bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-900/30 dark:text-indigo-400"
+              : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
           )}
         >
-          <span className="text-lg">🏠</span>
+          <span className="text-base">🏠</span>
           <span>全部工具</span>
-          <span className="ml-auto text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
+          <span className="ml-auto text-[10px] text-zinc-400 dark:text-zinc-500">
             {Object.values(toolCounts).reduce((a, b) => a + b, 0)}
           </span>
         </button>
@@ -77,16 +113,16 @@ export default function Sidebar({
         <button
           onClick={() => handleCategoryClick("favorites")}
           className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left",
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all text-left",
             activeCategory === "favorites"
-              ? "bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-md shadow-amber-500/20"
-              : "text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+              ? "bg-amber-50 text-amber-700 font-semibold dark:bg-amber-900/30 dark:text-amber-400"
+              : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
           )}
         >
-          <span className="text-lg">⭐</span>
+          <span className="text-base">⭐</span>
           <span>我的收藏</span>
           {favorites.length > 0 && (
-            <span className="ml-auto text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
+            <span className="ml-auto text-[10px] text-zinc-400 dark:text-zinc-500">
               {favorites.length}
             </span>
           )}
@@ -97,168 +133,88 @@ export default function Sidebar({
             key={cat.id}
             onClick={() => handleCategoryClick(cat.id)}
             className={cn(
-              "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left",
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all text-left",
               activeCategory === cat.id
-                ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md shadow-indigo-500/20"
-                : "text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+                ? "bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-900/30 dark:text-indigo-400"
+                : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
             )}
           >
-            <span className="text-lg">{cat.icon}</span>
+            <span className="text-base">{cat.icon}</span>
             <span>{cat.name}</span>
-            <span className="ml-auto text-xs opacity-70 bg-white/20 px-2 py-0.5 rounded-full">
+            <span className="ml-auto text-[10px] text-zinc-400 dark:text-zinc-500">
               {toolCounts[cat.id] || 0}
             </span>
           </button>
         ))}
       </nav>
 
-      {/* Extra pages */}
-      <div className="mt-6 mb-4 border-t border-zinc-200/80 dark:border-zinc-800/80 pt-4">
+      {/* Extra pages - compact */}
+      <div className="mb-4 border-t border-zinc-100 dark:border-zinc-800 pt-3">
         <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-3">
           更多板块
         </p>
         <div className="space-y-0.5">
-          <a
-            href="/news/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">📡</span>
-            <span>AI资讯</span>
+          <a href="/news/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">📡</span><span>AI资讯</span>
           </a>
-          <a
-            href="/guide/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🚀</span>
-            <span>新手入门</span>
+          <a href="/guide/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🚀</span><span>新手入门</span>
           </a>
-          <a
-            href="/tutorials/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🎓</span>
-            <span>实战教程</span>
+          <a href="/tutorials/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🎓</span><span>实战教程</span>
           </a>
-          <a
-            href="/compare/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">⚖️</span>
-            <span>工具对比</span>
+          <a href="/compare/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">⚖️</span><span>工具对比</span>
           </a>
-          <a
-            href="/rankings/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🏆</span>
-            <span>工具排行榜</span>
+          <a href="/rankings/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🏆</span><span>工具排行榜</span>
           </a>
-          <a
-            href="/reviews/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">📝</span>
-            <span>工具评测</span>
+          <a href="/reviews/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">📝</span><span>工具评测</span>
           </a>
-          <a
-            href="/solutions/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">💡</span>
-            <span>使用场景</span>
+          <a href="/solutions/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">💡</span><span>使用场景</span>
           </a>
-          <a
-            href="/prompts/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">📋</span>
-            <span>Prompt 模板</span>
+          <a href="/prompts/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">📋</span><span>Prompt 模板</span>
           </a>
-          <a
-            href="/roadmap/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🗺️</span>
-            <span>学习路线</span>
+          <a href="/roadmap/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🗺️</span><span>学习路线</span>
           </a>
-          <a
-            href="/changelog/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🔔</span>
-            <span>更新日志</span>
+          <a href="/changelog/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🔔</span><span>更新日志</span>
           </a>
-          <a
-            href="/quiz/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🎯</span>
-            <span>测测适合你的AI</span>
+          <a href="/quiz/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🎯</span><span>测测适合你的AI</span>
           </a>
-          <a
-            href="/api-transit/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
-          >
-            <span className="text-lg">🔗</span>
-            <span>API中转站</span>
+          <a href="/api-transit/" className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800/50 transition-all text-left">
+            <span className="text-base">🔗</span><span>API中转站</span>
           </a>
         </div>
       </div>
 
-      {/* Traffic CTA Cards */}
-      <div className="space-y-3">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200/60 dark:border-green-800/40">
-          <p className="text-xs font-medium text-green-700 dark:text-green-400 mb-1">
-            💬 公众号
-          </p>
-          <p className="text-xs text-green-600/80 dark:text-green-400/70 mb-3">
-            每日AI资讯+工具推荐
-          </p>
-          <button
-            onClick={() => onOpenTraffic?.("wechat")}
-            className="w-full py-2 px-3 rounded-lg bg-green-500 text-white text-xs font-medium hover:bg-green-600 transition-all shadow-sm shadow-green-500/20"
-          >
-            关注公众号
-          </button>
-        </div>
-
-        <div className="p-4 rounded-xl bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 border border-pink-200/60 dark:border-pink-800/40">
-          <p className="text-xs font-medium text-pink-700 dark:text-pink-400 mb-1">
-            📕 小红书
-          </p>
-          <p className="text-xs text-pink-600/80 dark:text-pink-400/70 mb-3">
-            AI教程+使用技巧
-          </p>
-          <button
-            onClick={() => onOpenTraffic?.("xiaohongshu")}
-            className="w-full py-2 px-3 rounded-lg bg-pink-500 text-white text-xs font-medium hover:bg-pink-600 transition-all shadow-sm shadow-pink-500/20"
-          >
-            关注小红书
-          </button>
-        </div>
-
-        <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border border-indigo-200/60 dark:border-indigo-800/40">
-          <p className="text-xs font-medium text-indigo-700 dark:text-indigo-400 mb-1">
-            👥 交流群
-          </p>
-          <p className="text-xs text-indigo-600/80 dark:text-indigo-400/70 mb-3">
-            和AI爱好者一起交流
-          </p>
-          <button
-            onClick={() => onOpenTraffic?.("group")}
-            className="w-full py-2 px-3 rounded-lg bg-indigo-500 text-white text-xs font-medium hover:bg-indigo-600 transition-all shadow-sm shadow-indigo-500/20"
-          >
-            加入群聊
-          </button>
-        </div>
+      {/* Social CTA - minimized */}
+      <div className="space-y-2 px-1">
+        <button
+          onClick={() => onOpenTraffic?.("wechat")}
+          className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-xs font-medium text-green-700 dark:text-green-400 transition-colors"
+        >
+          <span>💬</span> 关注公众号 · 每日推荐
+        </button>
+        <button
+          onClick={() => onOpenTraffic?.("xiaohongshu")}
+          className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-pink-50 hover:bg-pink-100 dark:bg-pink-900/20 dark:hover:bg-pink-900/30 text-xs font-medium text-pink-700 dark:text-pink-400 transition-colors"
+        >
+          <span>📕</span> 小红书 · AI教程
+        </button>
       </div>
     </div>
   );
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden lg:block w-64 h-screen sticky top-0 overflow-y-auto border-r border-zinc-200/80 bg-white/80 backdrop-blur-xl dark:bg-zinc-900/80 dark:border-zinc-800/80">
+      {/* Desktop sidebar - reduced width for lighter visual weight */}
+      <aside className="hidden lg:block w-56 xl:w-60 h-screen sticky top-0 overflow-y-auto border-r border-zinc-200/60 bg-white/90 backdrop-blur-xl dark:bg-zinc-950/90 dark:border-zinc-800/60 scrollbar-thin">
         {sidebarContent}
       </aside>
 
