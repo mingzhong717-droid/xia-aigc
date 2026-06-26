@@ -10,7 +10,7 @@ import ToolGridSection from "@/components/ToolGridSection";
 import TrafficModal from "@/components/TrafficModal";
 import SubmitToolModal from "@/components/SubmitToolModal";
 import HomeJsonLd from "@/components/HomeJsonLd";
-import NewsMarquee from "@/components/NewsMarquee";
+import SceneEntries from "@/components/SceneEntries";
 import { useDarkMode } from "@/hooks/useDarkMode";
 
 export default function Home() {
@@ -92,15 +92,15 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Hero Section - 左右布局大搜索框 */}
+          {/* Hero Section - 居中大搜索框 */}
           <HeroSection
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onOpenTraffic={openTraffic}
           />
 
-          {/* AI 快讯 - 自动滚动 */}
-          <NewsMarquee />
+          {/* 场景化快捷入口 */}
+          <SceneEntries onSearch={setSearchQuery} />
 
           {/* 编辑精选 - 8个工具 */}
           <FeaturedSection />
