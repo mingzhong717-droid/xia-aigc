@@ -31,15 +31,36 @@ export default function QuizPage() {
     setStarted(false);
   };
 
-  const handleShare = () => {
+  const [shareSuccess, setShareSuccess] = useState(false);
+
+  const handleShare = async () => {
     if (!result) return;
     const shareText = `${result.shareText}\n\n来测测你适合哪个AI工具 👉 https://aigc778.top/quiz/`;
+
+    // 手机端支持原生分享（微信/朋友圈/QQ等）
     if (navigator.share) {
-      navigator.share({ title: "AI工具测试结果", text: shareText });
-    } else {
-      navigator.clipboard.writeText(shareText);
-      alert("结果已复制到剪贴板，快去分享吧！");
+      try {
+        await navigator.share({ title: "AI工具测试结果", text: shareText });
+      } catch {
+        // 用户取消分享，忽略
+      }
+      return;
     }
+
+    // 网页端：复制到剪贴板 + 显示友好提示
+    try {
+      await navigator.clipboard.writeText(shareText);
+    } catch {
+      // fallback for older browsers
+      const textarea = document.createElement("textarea");
+      textarea.value = shareText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+    setShareSuccess(true);
+    setTimeout(() => setShareSuccess(false), 3000);
   };
 
   // Start screen
@@ -138,9 +159,13 @@ export default function QuizPage() {
               <div className="mt-6 space-y-3">
                 <button
                   onClick={handleShare}
-                  className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity shadow-md text-sm"
+                  className={`w-full px-4 py-3 rounded-xl font-medium transition-all shadow-md text-sm ${
+                    shareSuccess
+                      ? "bg-green-500 text-white"
+                      : "bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:opacity-90"
+                  }`}
                 >
-                  📤 分享我的结果
+                  {shareSuccess ? "✅ 已复制到剪贴板，去粘贴分享吧！" : "📤 分享我的结果"}
                 </button>
                 <div className="flex gap-3">
                   <button
