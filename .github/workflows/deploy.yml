@@ -33,6 +33,7 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
+          NEXT_TELEMETRY_DISABLED: "1"
 
       - name: Add .nojekyll
         run: touch ./out/.nojekyll
