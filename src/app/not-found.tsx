@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "页面未找到 | 小AIGC",
-  description: "抱歉，你访问的页面不存在。回到小AIGC首页，发现更多AI工具。",
+  title: "页面未找到 | 人人AI",
+  description: "抱歉，你访问的页面不存在。回到人人AI首页，发现更多AI工具。",
   robots: {
     index: false,
     follow: true,
@@ -82,7 +82,7 @@ export default function NotFound() {
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800">
           <p className="text-sm text-zinc-400 dark:text-zinc-500">
-            小AIGC — 让每个人都能轻松用上AI
+            人人AI — 让每个人都能轻松用上AI
           </p>
         </div>
       </div>

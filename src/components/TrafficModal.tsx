@@ -127,10 +127,10 @@ export default function TrafficModal({ type, onClose }: TrafficModalProps) {
               账号：
             </span>
             <code className="flex-1 text-sm font-mono text-zinc-700 dark:text-zinc-300 truncate">
-              小AIGC
+              人人AI
             </code>
             <button
-              onClick={() => handleCopy("小AIGC")}
+              onClick={() => handleCopy("人人AI")}
               className="px-3 py-1 rounded-md bg-zinc-200 dark:bg-zinc-700 text-xs font-medium hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors shrink-0"
             >
               {copied ? "已复制" : "复制"}

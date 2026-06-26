@@ -110,7 +110,7 @@ export default function Home() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm">
                 🤖
               </div>
-              <span className="font-bold text-zinc-900 dark:text-white">小AIGC</span>
+              <span className="font-bold text-zinc-900 dark:text-white">人人AI</span>
             </div>
             <button
               onClick={toggleDark}
@@ -124,7 +124,7 @@ export default function Home() {
           <div className="relative mb-6 sm:mb-8 rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white p-6 sm:p-8 shadow-lg">
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
             <div className="relative z-10">
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">🤖 小AIGC</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-2">🤖 人人AI</h1>
               <p className="text-indigo-100 text-base sm:text-lg mb-4">
                 AI工具导航站，让每个人都能轻松用上人工智能
               </p>
@@ -318,7 +318,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="text-sm text-zinc-500 dark:text-zinc-400">
                 <span className="font-semibold text-zinc-700 dark:text-zinc-300">
-                  小AIGC
+                  人人AI
                 </span>{" "}
                 — 让每个人都能轻松用上AI
               </div>

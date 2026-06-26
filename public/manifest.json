@@ -1,6 +1,6 @@
 {
-  "name": "小AIGC - AI工具导航站",
-  "short_name": "小AIGC",
+  "name": "人人AI - AI工具导航站",
+  "short_name": "人人AI",
   "description": "面向AI新手的工具导航站，精选500+实用AI工具，涵盖AI对话、写作、绘画、视频、音频等12大分类",
   "start_url": "/",
   "display": "standalone",

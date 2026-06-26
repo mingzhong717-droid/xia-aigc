@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "小AIGC - AI工具导航站 | 精选200+实用AI工具",
-    template: "%s | 小AIGC",
+    default: "人人AI - AI工具导航站 | 精选200+实用AI工具",
+    template: "%s | 人人AI",
   },
-  description: "小AIGC是面向AI新手的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等12大分类，帮你轻松找到最适合的AI工具。每周更新，免费无广告。",
+  description: "人人AI是面向AI新手的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等12大分类，帮你轻松找到最适合的AI工具。每周更新，免费无广告。",
   keywords: "AI工具,AI导航,AI工具导航,ChatGPT,AI写作,AI绘画,AI视频,人工智能,AI工具推荐,AI工具大全,免费AI工具,国产AI,AI对话,AI助手,AIGC,Midjourney,Stable Diffusion,文心一言,通义千问,Kimi",
-  authors: [{ name: "小AIGC" }],
-  creator: "小AIGC",
-  publisher: "小AIGC",
+  authors: [{ name: "人人AI" }],
+  creator: "人人AI",
+  publisher: "人人AI",
   formatDetection: {
     email: false,
     address: false,
@@ -30,16 +30,16 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://aigc778.top"),
   openGraph: {
-    title: "小AIGC - AI工具导航站 | 精选200+实用AI工具",
+    title: "人人AI - AI工具导航站 | 精选200+实用AI工具",
     description: "面向AI新手的工具导航站，精选200+实用AI工具，涵盖12大分类，让每个人都能轻松用上人工智能",
-    siteName: "小AIGC",
+    siteName: "人人AI",
     locale: "zh_CN",
     type: "website",
     url: "https://aigc778.top/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "小AIGC - AI工具导航站",
+    title: "人人AI - AI工具导航站",
     description: "精选200+实用AI工具，让每个人都能轻松用上人工智能",
     creator: "@xiaaigc",
   },
@@ -79,7 +79,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#4f46e5" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="小AIGC" />
+        <meta name="apple-mobile-web-app-title" content="人人AI" />
         {/* Baidu SEO verification - 替换为你的百度站长验证码 */}
         {/* <meta name="baidu-site-verification" content="YOUR_CODE" /> */}
         {/* Google Search Console verification - 替换为你的验证码 */}

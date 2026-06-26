@@ -10,8 +10,8 @@ export default function HomeJsonLd() {
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "小AIGC",
-    alternateName: "小AIGC - AI工具导航站",
+    name: "人人AI",
+    alternateName: "人人AI - AI工具导航站",
     url: "https://aigc778.top/",
     description:
       "面向AI小白的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、编程等分类",
@@ -55,7 +55,7 @@ export default function HomeJsonLd() {
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "小AIGC",
+    name: "人人AI",
     url: "https://aigc778.top/",
     logo: "https://aigc778.top/favicon.ico",
     description: "AI工具导航站，让每个人都能轻松用上人工智能",

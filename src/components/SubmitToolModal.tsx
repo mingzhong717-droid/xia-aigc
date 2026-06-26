@@ -32,7 +32,7 @@ export default function SubmitToolModal({ onClose }: SubmitToolModalProps) {
 - **建议分类**：${categoryName}
 
 ---
-*由小AIGC网站工具推荐功能提交*`;
+*由人人AI网站工具推荐功能提交*`;
 
     const issueUrl = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}&labels=${encodeURIComponent("tool-submission")}`;
 

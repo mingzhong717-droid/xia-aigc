@@ -50,7 +50,7 @@ export default function Sidebar({
         </div>
         <div>
           <h1 className="font-bold text-lg text-zinc-900 dark:text-white leading-tight">
-            小AIGC
+            人人AI
           </h1>
           <p className="text-xs text-zinc-400">AI工具，一找就用</p>
         </div>
