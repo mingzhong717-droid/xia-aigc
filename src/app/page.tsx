@@ -2,6 +2,7 @@
 
 import { useState, useRef, useMemo, memo } from "react";
 import { tools, categories } from "@/data/tools";
+import { news } from "@/data/news";
 import Sidebar from "@/components/Sidebar";
 import ToolCard from "@/components/ToolCard";
 import TrafficModal from "@/components/TrafficModal";
@@ -148,6 +149,51 @@ export default function Home() {
                   <span>📕</span> 小红书
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* AI 快讯 */}
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                <span>📡</span> AI 快讯
+              </h2>
+              <span className="text-xs text-zinc-400 dark:text-zinc-500">
+                每日更新
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {news.slice(0, 6).map((item) => (
+                <a
+                  key={item.id}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-indigo-700/50 hover:shadow-md transition-all group"
+                >
+                  <div className="flex items-start gap-2">
+                    <span className="text-xs mt-0.5 px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 shrink-0">
+                      {item.category === "product"
+                        ? "新品"
+                        : item.category === "update"
+                        ? "更新"
+                        : item.category === "industry"
+                        ? "动态"
+                        : "教程"}
+                    </span>
+                    <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 line-clamp-2">
+                    {item.summary}
+                  </p>
+                  <div className="flex items-center justify-between mt-2 text-[10px] text-zinc-400 dark:text-zinc-500">
+                    <span>{item.source}</span>
+                    <span>{item.date}</span>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
 

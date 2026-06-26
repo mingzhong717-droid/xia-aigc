@@ -112,8 +112,38 @@ export default function Sidebar({
         ))}
       </nav>
 
+      {/* Extra pages */}
+      <div className="mt-6 mb-4 border-t border-zinc-200/80 dark:border-zinc-800/80 pt-4">
+        <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-3">
+          更多板块
+        </p>
+        <div className="space-y-0.5">
+          <a
+            href="/guide/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🚀</span>
+            <span>新手指南</span>
+          </a>
+          <a
+            href="/prompts/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">📋</span>
+            <span>Prompt 模板</span>
+          </a>
+          <a
+            href="/quiz/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🎯</span>
+            <span>测测适合你的AI</span>
+          </a>
+        </div>
+      </div>
+
       {/* Traffic CTA Cards */}
-      <div className="mt-6 space-y-3">
+      <div className="space-y-3">
         <div className="p-4 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200/60 dark:border-green-800/40">
           <p className="text-xs font-medium text-green-700 dark:text-green-400 mb-1">
             💬 公众号
