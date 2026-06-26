@@ -23,6 +23,10 @@ export default function Home() {
   const [trafficType, setTrafficType] = useState<"wechat" | "douyin" | "xiaohongshu" | "group">("wechat");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [filterFree, setFilterFree] = useState<boolean | null>(null); // null=all, true=free, false=paid
+  const [filterChinese, setFilterChinese] = useState<boolean | null>(null);
+  const [filterNoVPN, setFilterNoVPN] = useState<boolean | null>(null);
+  const [showFilters, setShowFilters] = useState(false);
   const { favorites } = useFavorites();
   const { isDark, toggle: toggleDark } = useDarkMode();
   const mainRef = useRef<HTMLElement>(null);
@@ -36,6 +40,16 @@ export default function Home() {
     acc[cat.id] = tools.filter((t) => t.category === cat.id).length;
     return acc;
   }, {} as Record<string, number>);
+
+  const activeFiltersCount = [filterFree, filterChinese, filterNoVPN].filter(
+    (v) => v !== null
+  ).length;
+
+  const clearFilters = () => {
+    setFilterFree(null);
+    setFilterChinese(null);
+    setFilterNoVPN(null);
+  };
 
   const filteredTools = useMemo(() => {
     return tools.filter((tool) => {
@@ -54,9 +68,15 @@ export default function Home() {
         tool.tags.some((tag) =>
           tag.toLowerCase().includes(searchQuery.toLowerCase())
         );
-      return matchesCategory && matchesSearch;
+      const matchesFree =
+        filterFree === null || tool.isFree === filterFree;
+      const matchesChinese =
+        filterChinese === null || tool.hasChinese === filterChinese;
+      const matchesVPN =
+        filterNoVPN === null || tool.needVPN === !filterNoVPN;
+      return matchesCategory && matchesSearch && matchesFree && matchesChinese && matchesVPN;
     });
-  }, [activeCategory, searchQuery, favorites]);
+  }, [activeCategory, searchQuery, favorites, filterFree, filterChinese, filterNoVPN]);
 
   // Infinite scroll: load 24 items at a time
   const { visibleItems, hasMore } = useInfiniteScroll(filteredTools, mainRef, {
@@ -194,6 +214,24 @@ export default function Home() {
                 )}
               </div>
               <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={`relative flex w-10 h-10 rounded-xl border items-center justify-center transition-colors shadow-sm ${
+                  showFilters || activeFiltersCount > 0
+                    ? "bg-indigo-50 border-indigo-300 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-700 dark:text-indigo-400"
+                    : "bg-white border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                }`}
+                title="筛选"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                {activeFiltersCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-indigo-600 text-white text-[10px] flex items-center justify-center">
+                    {activeFiltersCount}
+                  </span>
+                )}
+              </button>
+              <button
                 onClick={toggleDark}
                 className="hidden lg:flex w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
                 title={isDark ? "切换亮色模式" : "切换暗色模式"}
@@ -202,8 +240,76 @@ export default function Home() {
               </button>
             </div>
 
+            {/* Advanced Filters Panel */}
+            {showFilters && (
+              <div className="mt-3 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">高级筛选</span>
+                  {activeFiltersCount > 0 && (
+                    <button
+                      onClick={clearFilters}
+                      className="text-xs text-indigo-500 hover:text-indigo-600 dark:text-indigo-400"
+                    >
+                      清除筛选
+                    </button>
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {/* Free/Paid */}
+                  <button
+                    onClick={() => setFilterFree(filterFree === true ? null : true)}
+                    className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
+                      filterFree === true
+                        ? "bg-green-100 text-green-700 border border-green-300 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700"
+                        : "bg-zinc-100 text-zinc-600 border border-transparent hover:bg-green-50 hover:text-green-600 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-green-900/20 dark:hover:text-green-400"
+                    }`}
+                  >
+                    ✅ 免费
+                  </button>
+                  <button
+                    onClick={() => setFilterFree(filterFree === false ? null : false)}
+                    className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
+                      filterFree === false
+                        ? "bg-amber-100 text-amber-700 border border-amber-300 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-700"
+                        : "bg-zinc-100 text-zinc-600 border border-transparent hover:bg-amber-50 hover:text-amber-600 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-amber-900/20 dark:hover:text-amber-400"
+                    }`}
+                  >
+                    💰 付费
+                  </button>
+
+                  <span className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 self-center mx-1" />
+
+                  {/* Chinese support */}
+                  <button
+                    onClick={() => setFilterChinese(filterChinese === true ? null : true)}
+                    className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
+                      filterChinese === true
+                        ? "bg-blue-100 text-blue-700 border border-blue-300 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-700"
+                        : "bg-zinc-100 text-zinc-600 border border-transparent hover:bg-blue-50 hover:text-blue-600 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-blue-900/20 dark:hover:text-blue-400"
+                    }`}
+                  >
+                    🇨🇳 支持中文
+                  </button>
+
+                  <span className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 self-center mx-1" />
+
+                  {/* No VPN needed */}
+                  <button
+                    onClick={() => setFilterNoVPN(filterNoVPN === true ? null : true)}
+                    className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
+                      filterNoVPN === true
+                        ? "bg-purple-100 text-purple-700 border border-purple-300 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-700"
+                        : "bg-zinc-100 text-zinc-600 border border-transparent hover:bg-purple-50 hover:text-purple-600 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-purple-900/20 dark:hover:text-purple-400"
+                    }`}
+                  >
+                    🌐 无需翻墙
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Hot search tags */}
-            {!searchQuery && activeCategory === "all" && (
+            {!searchQuery && activeCategory === "all" && !showFilters && (
               <div className="flex items-center gap-2 mt-3 flex-wrap">
                 <span className="text-xs text-zinc-400 dark:text-zinc-500">热门：</span>
                 {HOT_SEARCHES.map((keyword) => (

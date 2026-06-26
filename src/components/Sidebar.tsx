@@ -119,6 +119,13 @@ export default function Sidebar({
         </p>
         <div className="space-y-0.5">
           <a
+            href="/news/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">📡</span>
+            <span>AI资讯</span>
+          </a>
+          <a
             href="/guide/"
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
           >
@@ -131,6 +138,13 @@ export default function Sidebar({
           >
             <span className="text-lg">🎓</span>
             <span>实战教程</span>
+          </a>
+          <a
+            href="/compare/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">⚖️</span>
+            <span>工具对比</span>
           </a>
           <a
             href="/rankings/"
@@ -147,11 +161,32 @@ export default function Sidebar({
             <span>工具评测</span>
           </a>
           <a
+            href="/solutions/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">💡</span>
+            <span>使用场景</span>
+          </a>
+          <a
             href="/prompts/"
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
           >
             <span className="text-lg">📋</span>
             <span>Prompt 模板</span>
+          </a>
+          <a
+            href="/roadmap/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🗺️</span>
+            <span>学习路线</span>
+          </a>
+          <a
+            href="/changelog/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🔔</span>
+            <span>更新日志</span>
           </a>
           <a
             href="/quiz/"

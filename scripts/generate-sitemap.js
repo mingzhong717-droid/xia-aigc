@@ -25,17 +25,39 @@ while ((match = idRegex.exec(toolsSection)) !== null) {
 
 const today = new Date().toISOString().split("T")[0];
 
+// Static pages with their priorities
+const staticPages = [
+  { path: "/", changefreq: "daily", priority: "1.0" },
+  { path: "/news/", changefreq: "daily", priority: "0.9" },
+  { path: "/guide/", changefreq: "weekly", priority: "0.8" },
+  { path: "/tutorials/", changefreq: "weekly", priority: "0.8" },
+  { path: "/rankings/", changefreq: "weekly", priority: "0.8" },
+  { path: "/reviews/", changefreq: "weekly", priority: "0.8" },
+  { path: "/compare/", changefreq: "weekly", priority: "0.7" },
+  { path: "/solutions/", changefreq: "weekly", priority: "0.8" },
+  { path: "/prompts/", changefreq: "weekly", priority: "0.7" },
+  { path: "/quiz/", changefreq: "monthly", priority: "0.6" },
+  { path: "/roadmap/", changefreq: "weekly", priority: "0.7" },
+  { path: "/changelog/", changefreq: "daily", priority: "0.7" },
+];
+
 // Build sitemap XML
 let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${BASE_URL}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
 `;
 
+// Add static pages
+for (const page of staticPages) {
+  sitemap += `  <url>
+    <loc>${BASE_URL}${page.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>
+`;
+}
+
+// Add tool detail pages
 for (const id of toolIds) {
   sitemap += `  <url>
     <loc>${BASE_URL}/tool/${id}/</loc>
@@ -52,6 +74,8 @@ sitemap += `</urlset>
 // Write to public directory
 const outputPath = path.join(__dirname, "../public/sitemap.xml");
 fs.writeFileSync(outputPath, sitemap, "utf8");
+
+const totalUrls = staticPages.length + toolIds.length;
 console.log(
-  `Sitemap generated: ${toolIds.length} tool pages + 1 homepage = ${toolIds.length + 1} URLs`
+  `Sitemap generated: ${staticPages.length} static pages + ${toolIds.length} tool pages = ${totalUrls} URLs`
 );

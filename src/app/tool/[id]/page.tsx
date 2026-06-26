@@ -63,6 +63,16 @@ export default async function ToolPage({ params }: Props) {
     .filter((t) => t.category !== tool.category && t.tags.some((tag) => tool.tags.includes(tag)))
     .slice(0, 4);
 
+  // Free alternatives (same category, free, not self)
+  const freeAlternatives = !tool.isFree
+    ? tools.filter((t) => t.category === tool.category && t.isFree && t.id !== tool.id).slice(0, 4)
+    : [];
+
+  // No-VPN alternatives (same category, no VPN needed, not self)
+  const noVpnAlternatives = tool.needVPN
+    ? tools.filter((t) => t.category === tool.category && !t.needVPN && t.id !== tool.id).slice(0, 4)
+    : [];
+
   // Structured data for SEO
   const jsonLd = {
     "@context": "https://schema.org",
@@ -275,6 +285,154 @@ export default async function ToolPage({ params }: Props) {
           </div>
         )}
 
+        {/* Free Alternatives */}
+        {freeAlternatives.length > 0 && (
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
+            <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
+              🆓 免费替代方案
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+              不想付费？试试这些免费的同类工具
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {freeAlternatives.map((alt) => (
+                <Link
+                  key={alt.id}
+                  href={`/tool/${alt.id}`}
+                  className="flex items-center gap-3 p-3 rounded-xl border border-green-100 hover:border-green-300 hover:bg-green-50/50 transition-all dark:border-zinc-800 dark:hover:border-green-800/50 dark:hover:bg-green-900/10"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-50 to-green-100 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center text-xl shrink-0">
+                    {alt.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-medium text-sm text-zinc-900 dark:text-white truncate block">
+                      {alt.name}
+                    </span>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                      {alt.recommendation}
+                    </p>
+                  </div>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400 font-medium">
+                    免费
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* No-VPN Alternatives */}
+        {noVpnAlternatives.length > 0 && (
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
+            <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
+              🌐 无需翻墙的替代方案
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+              不方便翻墙？这些同类工具可以直接访问
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {noVpnAlternatives.map((alt) => (
+                <Link
+                  key={alt.id}
+                  href={`/tool/${alt.id}`}
+                  className="flex items-center gap-3 p-3 rounded-xl border border-blue-100 hover:border-blue-300 hover:bg-blue-50/50 transition-all dark:border-zinc-800 dark:hover:border-blue-800/50 dark:hover:bg-blue-900/10"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center text-xl shrink-0">
+                    {alt.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-medium text-sm text-zinc-900 dark:text-white truncate block">
+                      {alt.name}
+                    </span>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                      {alt.recommendation}
+                    </p>
+                  </div>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-medium">
+                    直连
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Usage Tips */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">
+            💡 使用小技巧
+          </h2>
+          <div className="space-y-3">
+            <div className="flex gap-3 p-3 rounded-xl bg-amber-50/50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-800/30">
+              <span className="text-amber-500 shrink-0 mt-0.5">💬</span>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                使用{tool.name}时，尽量用具体清晰的描述来表达你的需求，越详细效果越好。
+              </p>
+            </div>
+            {tool.isFree && (
+              <div className="flex gap-3 p-3 rounded-xl bg-green-50/50 dark:bg-green-900/10 border border-green-100 dark:border-green-800/30">
+                <span className="text-green-500 shrink-0 mt-0.5">💡</span>
+                <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                  虽然基础功能免费，但付费版本通常能解锁更多高级功能，可以先免费试用确认满足需求再升级。
+                </p>
+              </div>
+            )}
+            {!tool.hasChinese && (
+              <div className="flex gap-3 p-3 rounded-xl bg-blue-50/50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/30">
+                <span className="text-blue-500 shrink-0 mt-0.5">🌍</span>
+                <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                  该工具暂不支持中文，建议配合翻译工具使用。即使输入中文也可能得到英文回复。
+                </p>
+              </div>
+            )}
+            <div className="flex gap-3 p-3 rounded-xl bg-purple-50/50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-800/30">
+              <span className="text-purple-500 shrink-0 mt-0.5">🔖</span>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                建议收藏本页面，方便下次快速找到。也可以在首页点击工具卡片的「⭐」图标进行收藏。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">
+            ❓ 常见问题
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-sm font-semibold text-zinc-900 dark:text-white mb-1">
+                {tool.name}是免费的吗？
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {tool.isFree
+                  ? `${tool.name}提供免费版本供用户使用，部分高级功能可能需要升级到付费计划。`
+                  : `${tool.name}是付费工具，通常提供试用期或免费额度。建议先试用后再决定是否购买。`}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-zinc-900 dark:text-white mb-1">
+                国内能直接访问吗？
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {tool.needVPN
+                  ? `${tool.name}需要翻墙才能访问。如果你不方便翻墙，可以考虑同类的国内替代工具。`
+                  : `${tool.name}可以在国内网络环境下直接访问，无需翻墙。`}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-zinc-900 dark:text-white mb-1">
+                支持中文吗？
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {tool.hasChinese
+                  ? `${tool.name}支持中文界面和中文输入输出，对中文用户非常友好。`
+                  : `${tool.name}目前主要支持英文。你可以尝试用英文提问，或者配合翻译工具使用。`}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Related by tags */}
         {relatedTools.length > 0 && (
           <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
@@ -312,6 +470,22 @@ export default async function ToolPage({ params }: Props) {
             </div>
           </div>
         )}
+
+        {/* Compare CTA */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-2xl border border-indigo-200/60 dark:border-indigo-800/30 p-6 mb-6 text-center">
+          <p className="text-sm font-medium text-zinc-900 dark:text-white mb-2">
+            ⚖️ 不确定选哪个？
+          </p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+            把 {tool.name} 和其他工具放在一起对比看看
+          </p>
+          <Link
+            href="/compare/"
+            className="inline-block px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+          >
+            去对比 →
+          </Link>
+        </div>
 
         {/* Back to Home */}
         <div className="mt-8 text-center">
