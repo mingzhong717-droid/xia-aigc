@@ -42,3 +42,6 @@ next-env.d.ts
 .netlify/
 xia-aigc-deploy.zip
 dist/
+
+# screenshots
+review-*.png
