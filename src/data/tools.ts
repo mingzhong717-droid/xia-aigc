@@ -3,6 +3,7 @@ export interface Tool {
   name: string;
   description: string;
   icon: string;
+  logoUrl?: string; // 工具官方 logo 图片 URL
   url: string;
   category: string;
   tags: string[];

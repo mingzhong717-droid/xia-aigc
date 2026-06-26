@@ -4,6 +4,7 @@ import { useState } from "react";
 import { quizQuestions, calculateResult, type QuizResult } from "@/data/quiz";
 import { tools } from "@/data/tools";
 import Link from "next/link";
+import ToolLogo from "@/components/ToolLogo";
 
 export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -129,8 +130,8 @@ export default function QuizPage() {
                       href={`/tool/${toolId}`}
                       className="flex items-center gap-3 p-3 rounded-xl bg-zinc-50 hover:bg-indigo-50 dark:bg-zinc-800 dark:hover:bg-indigo-900/20 transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-white dark:bg-zinc-700 flex items-center justify-center text-xl shadow-sm">
-                        {tool.icon}
+                      <div className="w-10 h-10 rounded-lg bg-white dark:bg-zinc-700 flex items-center justify-center shadow-sm">
+                        <ToolLogo url={tool.url} icon={tool.icon} name={tool.name} logoUrl={tool.logoUrl} size="sm" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">

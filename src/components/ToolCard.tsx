@@ -3,6 +3,7 @@
 import { Tool } from "@/data/tools";
 import Link from "next/link";
 import { useFavorites } from "@/hooks/useFavorites";
+import ToolLogo from "@/components/ToolLogo";
 
 interface ToolCardProps {
   tool: Tool;
@@ -83,8 +84,8 @@ const ToolCard = React.memo(function ToolCard({ tool, index = 0, searchQuery }: 
       </div>
       <Link href={`/tool/${tool.id}`} className="block">
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform duration-300">
-          {tool.icon}
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+          <ToolLogo url={tool.url} icon={tool.icon} name={tool.name} logoUrl={tool.logoUrl} />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">

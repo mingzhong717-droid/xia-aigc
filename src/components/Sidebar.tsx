@@ -123,7 +123,28 @@ export default function Sidebar({
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
           >
             <span className="text-lg">🚀</span>
-            <span>新手指南</span>
+            <span>新手入门</span>
+          </a>
+          <a
+            href="/tutorials/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🎓</span>
+            <span>实战教程</span>
+          </a>
+          <a
+            href="/rankings/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">🏆</span>
+            <span>工具排行榜</span>
+          </a>
+          <a
+            href="/reviews/"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left text-zinc-600 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+          >
+            <span className="text-lg">📝</span>
+            <span>工具评测</span>
           </a>
           <a
             href="/prompts/"

@@ -1,6 +1,7 @@
 import { tools, categories } from "@/data/tools";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import ToolLogo from "@/components/ToolLogo";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -111,8 +112,8 @@ export default async function ToolPage({ params }: Props) {
         {/* Tool Header */}
         <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 mb-6">
           <div className="flex items-start gap-4 sm:gap-6">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center text-4xl sm:text-5xl shrink-0">
-              {tool.icon}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700 flex items-center justify-center shrink-0">
+              <ToolLogo url={tool.url} icon={tool.icon} name={tool.name} logoUrl={tool.logoUrl} size="lg" />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2 flex-wrap">
