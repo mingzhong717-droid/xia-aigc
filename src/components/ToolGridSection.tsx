@@ -274,11 +274,25 @@ export default function ToolGridSection({ searchQuery, activeCategory, onCategor
           )}
         </>
       ) : (
-        <div className="text-center py-16">
+        <div className="text-center py-12">
           <p className="text-4xl mb-4">🔍</p>
-          <p className="text-zinc-500 dark:text-zinc-400 mb-3">
-            没有找到匹配的工具，试试其他关键词？
+          <p className="text-zinc-500 dark:text-zinc-400 mb-2">
+            没有找到匹配的工具
           </p>
+          <p className="text-sm text-zinc-400 dark:text-zinc-500 mb-6">
+            试试其他关键词，或者看看这些热门工具：
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {["ChatGPT", "Kimi", "Midjourney", "DeepSeek", "Cursor", "豆包"].map((name) => (
+              <button
+                key={name}
+                onClick={() => onCategoryChange("all")}
+                className="text-sm px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-400 dark:hover:bg-indigo-900/40 transition-colors border border-indigo-200 dark:border-indigo-800/50"
+              >
+                {name}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </section>

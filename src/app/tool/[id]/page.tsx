@@ -1,4 +1,5 @@
 import { tools, categories } from "@/data/tools";
+import { editorialPicks } from "@/data/editorial";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ToolLogo from "@/components/ToolLogo";
@@ -73,6 +74,9 @@ export default async function ToolPage({ params }: Props) {
     ? tools.filter((t) => t.category === tool.category && !t.needVPN && t.id !== tool.id).slice(0, 4)
     : [];
 
+  // Editorial review data
+  const editorial = editorialPicks.find((e) => e.toolId === id);
+
   // Structured data for SEO
   const jsonLd = {
     "@context": "https://schema.org",
@@ -145,6 +149,26 @@ export default async function ToolPage({ params }: Props) {
                     需翻墙
                   </span>
                 )}
+                {editorial?.status === "active" && (
+                  <span className="text-xs px-2 py-1 rounded-md bg-emerald-50 text-emerald-600 font-medium dark:bg-emerald-900/20 dark:text-emerald-400">
+                    🟢 活跃更新
+                  </span>
+                )}
+                {editorial?.status === "beta" && (
+                  <span className="text-xs px-2 py-1 rounded-md bg-amber-50 text-amber-600 font-medium dark:bg-amber-900/20 dark:text-amber-400">
+                    🟡 Beta测试
+                  </span>
+                )}
+                {editorial?.status === "deprecated" && (
+                  <span className="text-xs px-2 py-1 rounded-md bg-red-50 text-red-600 font-medium dark:bg-red-900/20 dark:text-red-400">
+                    🔴 已停更
+                  </span>
+                )}
+                {editorial?.score && (
+                  <span className="text-xs px-2 py-1 rounded-md bg-indigo-50 text-indigo-600 font-medium dark:bg-indigo-900/20 dark:text-indigo-400">
+                    ⭐ {editorial.score}分
+                  </span>
+                )}
               </div>
               <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 {tool.description}
@@ -187,6 +211,79 @@ export default async function ToolPage({ params }: Props) {
             )}
           </div>
         </div>
+
+        {/* Editorial Review */}
+        {editorial && (
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-indigo-200/60 dark:border-indigo-800/30 p-6 sm:p-8 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-lg">📝</span>
+                <h2 className="text-lg font-bold text-zinc-900 dark:text-white">编辑测评</h2>
+                {editorial.lastReviewed && (
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400 border border-green-200 dark:border-green-800/30">
+                    ✓ {editorial.lastReviewed} 实测
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{editorial.score}</span>
+                <span className="text-xs text-zinc-400 dark:text-zinc-500">/10</span>
+              </div>
+            </div>
+
+            {/* One-liner */}
+            <p className="text-base text-zinc-700 dark:text-zinc-300 font-medium mb-4 pl-4 border-l-3 border-indigo-400 dark:border-indigo-500">
+              &ldquo;{editorial.oneLiner}&rdquo;
+            </p>
+
+            {/* Pros & Cons */}
+            {(editorial.pros || editorial.cons) && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                {editorial.pros && (
+                  <div className="p-3 rounded-xl bg-green-50/50 dark:bg-green-900/10 border border-green-100 dark:border-green-800/30">
+                    <p className="text-xs font-semibold text-green-700 dark:text-green-400 mb-2">👍 优点</p>
+                    <ul className="space-y-1.5">
+                      {editorial.pros.map((pro, i) => (
+                        <li key={i} className="text-sm text-zinc-700 dark:text-zinc-300 flex items-start gap-1.5">
+                          <span className="text-green-500 mt-0.5 shrink-0">+</span>
+                          {pro}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {editorial.cons && (
+                  <div className="p-3 rounded-xl bg-orange-50/50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-800/30">
+                    <p className="text-xs font-semibold text-orange-700 dark:text-orange-400 mb-2">⚠️ 不足</p>
+                    <ul className="space-y-1.5">
+                      {editorial.cons.map((con, i) => (
+                        <li key={i} className="text-sm text-zinc-700 dark:text-zinc-300 flex items-start gap-1.5">
+                          <span className="text-orange-500 mt-0.5 shrink-0">-</span>
+                          {con}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Verdict */}
+            {editorial.verdict && (
+              <div className="p-3 rounded-xl bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-800/30">
+                <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                  <span className="font-semibold text-indigo-700 dark:text-indigo-400">编辑结语：</span>{editorial.verdict}
+                </p>
+              </div>
+            )}
+
+            {/* Audience */}
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-xs text-zinc-400 dark:text-zinc-500">适合：</span>
+              <span className="text-xs px-2 py-1 rounded-full bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">{editorial.audience}</span>
+            </div>
+          </div>
+        )}
 
         {/* Tool Info Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">

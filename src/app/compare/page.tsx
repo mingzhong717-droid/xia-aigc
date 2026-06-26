@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { tools, categories } from "@/data/tools";
+import { editorialPicks } from "@/data/editorial";
 import Link from "next/link";
 import ToolLogo from "@/components/ToolLogo";
 
@@ -43,9 +44,11 @@ export default function ComparePage() {
 
   // Popular comparison presets
   const presets = [
-    { label: "ChatGPT vs Claude vs 文心一言", ids: ["chatgpt", "claude", "wenxin"] },
-    { label: "Midjourney vs Stable Diffusion vs DALL-E", ids: ["midjourney", "stable-diffusion", "dall-e"] },
-    { label: "剪映 vs CapCut vs 必剪", ids: ["jianying", "capcut", "bicut"] },
+    { label: "ChatGPT vs Claude vs DeepSeek", ids: ["chatgpt", "claude", "deepseek"] },
+    { label: "Kimi vs 豆包 vs 通义千问", ids: ["kimi", "doubao", "tongyi"] },
+    { label: "Midjourney vs Stable Diffusion vs 即梦", ids: ["midjourney", "stable-diffusion", "jimeng"] },
+    { label: "Cursor vs GitHub Copilot vs Codeium", ids: ["cursor", "github-copilot", "codeium"] },
+    { label: "ChatGPT vs Kimi vs DeepSeek", ids: ["chatgpt", "kimi", "deepseek"] },
   ];
 
   const applyPreset = (ids: string[]) => {
@@ -276,8 +279,30 @@ export default function ComparePage() {
                   ))}
                 </tr>
 
-                {/* Recommendation */}
+                {/* Editorial Score */}
                 <tr className="bg-white dark:bg-zinc-900/50">
+                  <td className="p-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                    编辑评分
+                  </td>
+                  {selectedTools.map((tool) => {
+                    const ed = editorialPicks.find((e) => e.toolId === tool!.id);
+                    return (
+                      <td key={tool!.id} className="p-4 text-center">
+                        {ed ? (
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">{ed.score}</span>
+                            <span className="text-xs text-zinc-400">/10</span>
+                          </div>
+                        ) : (
+                          <span className="text-xs text-zinc-400">暂无评分</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+
+                {/* Recommendation */}
+                <tr>
                   <td className="p-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                     推荐理由
                   </td>

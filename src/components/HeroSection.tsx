@@ -4,6 +4,15 @@ import { useState } from "react";
 
 const HOT_TAGS = ["ChatGPT", "AI绘画", "写作助手", "PPT", "视频生成", "免费", "国产AI", "编程"];
 
+const SEARCH_SUGGESTIONS = [
+  { icon: "📕", text: "写小红书文案", query: "小红书" },
+  { icon: "🎬", text: "生成短视频", query: "视频生成" },
+  { icon: "📊", text: "做PPT演示", query: "PPT" },
+  { icon: "✍️", text: "写一篇文章", query: "写作" },
+  { icon: "💻", text: "辅助写代码", query: "编程" },
+  { icon: "🌐", text: "翻译文档", query: "翻译" },
+];
+
 interface HeroSectionProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
@@ -47,6 +56,25 @@ export default function HeroSection({ searchQuery, onSearchChange, onOpenTraffic
             >
               ✕
             </button>
+          )}
+
+          {/* Focus suggestions dropdown */}
+          {isFocused && !searchQuery && (
+            <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-lg z-20">
+              <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-2 px-1">试试搜索：</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                {SEARCH_SUGGESTIONS.map((s) => (
+                  <button
+                    key={s.query}
+                    onMouseDown={(e) => { e.preventDefault(); onSearchChange(s.query); }}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-zinc-700 dark:text-zinc-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-left"
+                  >
+                    <span>{s.icon}</span>
+                    <span>{s.text}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
         </div>
 

@@ -108,6 +108,32 @@ export default function Home() {
           {/* 热门工具 - 分类tab切换 */}
           <PopularSection />
 
+          {/* 互动入口 - 引导测试和对比 */}
+          <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a
+              href="/quiz/"
+              className="group flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 border border-violet-200/60 dark:border-violet-800/30 hover:border-violet-300 dark:hover:border-violet-700 transition-all"
+            >
+              <span className="text-3xl group-hover:scale-110 transition-transform">🧪</span>
+              <div>
+                <p className="text-sm font-semibold text-zinc-900 dark:text-white">不知道选哪个 AI？</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">1分钟测试，找到最适合你的工具</p>
+              </div>
+              <span className="ml-auto text-violet-400 group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a
+              href="/compare/"
+              className="group flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border border-blue-200/60 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-700 transition-all"
+            >
+              <span className="text-3xl group-hover:scale-110 transition-transform">⚖️</span>
+              <div>
+                <p className="text-sm font-semibold text-zinc-900 dark:text-white">工具对比</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">把 2-3 个工具放一起，看谁更适合你</p>
+              </div>
+              <span className="ml-auto text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+
           {/* 全部工具网格 */}
           <div id="tool-grid-section">
             <ToolGridSection
