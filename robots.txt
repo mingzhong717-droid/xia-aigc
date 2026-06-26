@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow admin/api paths (none currently, but good practice)
+Disallow: /_next/static/
+Disallow: /404/
+
+Sitemap: https://aigc778.top/sitemap.xml
