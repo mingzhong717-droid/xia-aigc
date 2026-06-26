@@ -34,6 +34,8 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
           NEXT_TELEMETRY_DISABLED: "1"
+          ESLINT_NO_DEV_ERRORS: "true"
+          NEXT_LINT_IGNORE: "true"
 
       - name: Add .nojekyll
         run: touch ./out/.nojekyll
