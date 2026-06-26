@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
       siteName: "小AIGC",
       locale: "zh_CN",
       type: "article",
-      url: `https://mingzhong717-droid.github.io/xia-aigc/tool/${id}/`,
+      url: `https://aigc778.top/tool/${id}/`,
     },
     twitter: {
       card: "summary" as const,
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props) {
       description: tool.description,
     },
     alternates: {
-      canonical: `https://mingzhong717-droid.github.io/xia-aigc/tool/${id}/`,
+      canonical: `https://aigc778.top/tool/${id}/`,
     },
   };
 }

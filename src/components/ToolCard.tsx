@@ -39,7 +39,7 @@ const ToolCard = React.memo(function ToolCard({ tool, index = 0, searchQuery }: 
   const handleShare = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const shareUrl = `${window.location.origin}/xia-aigc/tool/${tool.id}/`;
+    const shareUrl = `${window.location.origin}/tool/${tool.id}/`;
     const shareText = `${tool.name} - ${tool.description}`;
     if (navigator.share) {
       navigator.share({ title: tool.name, text: shareText, url: shareUrl });

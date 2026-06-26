@@ -1,9 +1,9 @@
-const CACHE_NAME = 'xia-aigc-v1';
+const CACHE_NAME = 'xia-aigc-v2';
 const STATIC_ASSETS = [
-  '/xia-aigc/',
-  '/xia-aigc/index.html',
-  '/xia-aigc/favicon.ico',
-  '/xia-aigc/manifest.json',
+  '/',
+  '/index.html',
+  '/favicon.ico',
+  '/manifest.json',
 ];
 
 // Install: cache static assets
@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
   // Cache-first for static assets (JS, CSS, images, fonts)
   if (
     url.pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/) ||
-    url.pathname.startsWith('/xia-aigc/_next/')
+    url.pathname.startsWith('/_next/')
   ) {
     event.respondWith(
       caches.match(request).then((cached) => {
@@ -77,7 +77,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => {
           return caches.match(request).then((cached) => {
             if (cached) return cached;
-            return caches.match('/xia-aigc/index.html');
+            return caches.match('/index.html');
           });
         })
     );

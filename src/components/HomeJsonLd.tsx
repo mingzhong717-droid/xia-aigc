@@ -12,7 +12,7 @@ export default function HomeJsonLd() {
     "@type": "WebSite",
     name: "小AIGC",
     alternateName: "小AIGC - AI工具导航站",
-    url: "https://mingzhong717-droid.github.io/xia-aigc/",
+    url: "https://aigc778.top/",
     description:
       "面向AI小白的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、编程等分类",
     inLanguage: "zh-CN",
@@ -21,7 +21,7 @@ export default function HomeJsonLd() {
       target: {
         "@type": "EntryPoint",
         urlTemplate:
-          "https://mingzhong717-droid.github.io/xia-aigc/?search={search_term_string}",
+          "https://aigc778.top/?search={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },
@@ -56,8 +56,8 @@ export default function HomeJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "小AIGC",
-    url: "https://mingzhong717-droid.github.io/xia-aigc/",
-    logo: "https://mingzhong717-droid.github.io/xia-aigc/favicon.ico",
+    url: "https://aigc778.top/",
+    logo: "https://aigc778.top/favicon.ico",
     description: "AI工具导航站，让每个人都能轻松用上人工智能",
   };
 

@@ -8,4 +8,4 @@ Crawl-delay: 1
 Disallow: /_next/static/
 Disallow: /404/
 
-Sitemap: https://mingzhong717-droid.github.io/xia-aigc/sitemap.xml
+Sitemap: https://aigc778.top/sitemap.xml

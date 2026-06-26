@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://mingzhong717-droid.github.io/xia-aigc"),
+  metadataBase: new URL("https://aigc778.top"),
   openGraph: {
     title: "小AIGC - AI工具导航站 | 精选200+实用AI工具",
     description: "面向AI新手的工具导航站，精选200+实用AI工具，涵盖12大分类，让每个人都能轻松用上人工智能",
     siteName: "小AIGC",
     locale: "zh_CN",
     type: "website",
-    url: "https://mingzhong717-droid.github.io/xia-aigc/",
+    url: "https://aigc778.top/",
   },
   twitter: {
     card: "summary_large_image",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://mingzhong717-droid.github.io/xia-aigc/",
+    canonical: "https://aigc778.top/",
   },
   category: "technology",
 };
@@ -72,9 +72,9 @@ export default function RootLayout({
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <link rel="icon" href="/xia-aigc/favicon.ico" />
-        <link rel="apple-touch-icon" href="/xia-aigc/favicon.ico" />
-        <link rel="manifest" href="/xia-aigc/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#4f46e5" />
         <meta name="msapplication-TileColor" content="#4f46e5" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -118,7 +118,7 @@ export default function RootLayout({
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/xia-aigc/sw.js').then(
+                navigator.serviceWorker.register('/sw.js').then(
                   function(registration) {
                     console.log('ServiceWorker registration successful');
                   },

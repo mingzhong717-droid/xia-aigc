@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const BASE_URL = "https://mingzhong717-droid.github.io/xia-aigc";
+const BASE_URL = "https://aigc778.top";
 
 // Read tools.ts and extract tool IDs
 const toolsFile = fs.readFileSync(
