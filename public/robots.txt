@@ -1,11 +1,42 @@
+# robots.txt for aigc778.top
+
 User-agent: *
 Allow: /
-
-# Crawl-delay for polite crawling
 Crawl-delay: 1
 
-# Disallow admin/api paths (none currently, but good practice)
-Disallow: /_next/static/
+# Do not block rendering resources
+# Allow: /_next/static/
+
+# Block non-content paths
 Disallow: /404/
+
+# AI Bots - Explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# AI-readable content
+# /llms.txt - LLM-friendly site description
+# /ai.txt - Machine-readable site metadata
 
 Sitemap: https://aigc778.top/sitemap.xml

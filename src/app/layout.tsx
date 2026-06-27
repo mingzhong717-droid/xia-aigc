@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "人人AI - AI工具导航站 | 精选200+实用AI工具",
+    default: "人人AI - AI工具导航站 | 精选585+实用AI工具",
     template: "%s | 人人AI",
   },
-  description: "人人AI是面向AI新手的工具导航站，精选200+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等12大分类，帮你轻松找到最适合的AI工具。每周更新，免费无广告。",
+  description: "人人AI是面向AI新手的工具导航站，精选585+实用AI工具，涵盖AI对话、写作、绘画、视频、音频、PPT、编程、设计、办公、学习等12大分类，帮你轻松找到最适合的AI工具。每周更新，免费无广告。",
   keywords: "AI工具,AI导航,AI工具导航,ChatGPT,AI写作,AI绘画,AI视频,人工智能,AI工具推荐,AI工具大全,免费AI工具,国产AI,AI对话,AI助手,AIGC,Midjourney,Stable Diffusion,文心一言,通义千问,Kimi",
   authors: [{ name: "人人AI" }],
   creator: "人人AI",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://aigc778.top"),
   openGraph: {
-    title: "人人AI - AI工具导航站 | 精选200+实用AI工具",
-    description: "面向AI新手的工具导航站，精选200+实用AI工具，涵盖12大分类，让每个人都能轻松用上人工智能",
+    title: "人人AI - AI工具导航站 | 精选585+实用AI工具",
+    description: "面向AI新手的工具导航站，精选585+实用AI工具，涵盖12大分类，让每个人都能轻松用上人工智能",
     siteName: "人人AI",
     locale: "zh_CN",
     type: "website",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "人人AI - AI工具导航站",
-    description: "精选200+实用AI工具，让每个人都能轻松用上人工智能",
+    description: "精选585+实用AI工具，让每个人都能轻松用上人工智能",
     creator: "@xiaaigc",
   },
   robots: {
@@ -53,9 +53,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  alternates: {
-    canonical: "https://aigc778.top/",
   },
   category: "technology",
 };

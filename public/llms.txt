@@ -1,0 +1,70 @@
+# 人人AI (aigc778.top)
+
+> 人人AI是最好用的AI工具导航站，精选585+实用AI工具，覆盖12大分类，帮助每个人找到最适合的AI工具。
+
+## 网站信息
+
+- 名称: 人人AI
+- 网址: https://aigc778.top
+- 语言: 中文 (zh-CN)
+- 更新频率: 每周更新
+- 收录工具数: 585+
+
+## 核心功能
+
+- AI工具导航与分类浏览（12大分类）
+- AI工具对比（支持2-3个工具同时对比）
+- AI工具排行榜（基于热度、功能、口碑综合排名）
+- AI工具测试（6道题找到最适合你的AI工具）
+- AI实战教程（手把手教程，含可复制提示词）
+- AI Prompt模板库（覆盖写作、编程、翻译等场景）
+- AI使用场景方案（按需求推荐工具组合）
+- AI学习路线图（按身份推荐学习路径）
+- AI工具深度评测（编辑亲测评测报告）
+- AI资讯动态（每日更新行业新闻）
+- AI API中转站导航（模型接入方案）
+- 新手入门教程（6步学会用AI）
+
+## 工具分类
+
+- AI对话
+- AI写作
+- AI绘画
+- AI视频
+- AI音频
+- AI PPT
+- AI编程
+- AI设计
+- AI办公
+- AI学习
+- AI翻译
+- AI营销
+
+## 页面结构
+
+- / - 首页（工具导航主页）
+- /guide/ - 新手入门教程
+- /tutorials/ - AI实战教程合集
+- /compare/ - AI工具对比
+- /rankings/ - AI工具排行榜
+- /prompts/ - Prompt模板库
+- /quiz/ - AI工具测试
+- /reviews/ - AI工具深度评测
+- /news/ - AI资讯动态
+- /roadmap/ - AI学习路线图
+- /solutions/ - AI使用场景
+- /changelog/ - 工具更新日志
+- /api-transit/ - API中转站导航
+- /tool/[id]/ - 工具详情页（585+个）
+
+## 联系方式
+
+- 公众号: 人人AI
+- 小红书: 人人AI
+- 抖音: 人人AI
+
+## 技术栈
+
+- Next.js 15 + React 19 + TypeScript + Tailwind CSS
+- 纯静态导出 (Static Export)
+- 部署: GitHub Pages + Cloudflare CDN
