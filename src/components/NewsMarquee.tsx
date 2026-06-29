@@ -12,7 +12,7 @@ export default function NewsMarquee() {
     if (!container) return;
 
     let animationId: number;
-    let scrollSpeed = 0.5; // px per frame
+    const scrollSpeed = 0.5; // px per frame
 
     const scroll = () => {
       if (!isPaused && container) {
