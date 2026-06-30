@@ -34,7 +34,7 @@ function HighlightText({ text, query }: { text: string; query?: string }) {
 
 import React from "react";
 
-const ToolCard = React.memo(function ToolCard({ tool, index = 0, searchQuery }: ToolCardProps) {
+const ToolCard = React.memo(function ToolCard({ tool, searchQuery }: ToolCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleShare = (e: React.MouseEvent) => {
