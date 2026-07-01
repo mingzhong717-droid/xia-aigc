@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface ToolLogoProps {
@@ -14,6 +15,12 @@ const sizeMap = {
   sm: "w-6 h-6",
   md: "w-8 h-8",
   lg: "w-12 h-12",
+};
+
+const imageSizeMap = {
+  sm: 24,
+  md: 32,
+  lg: 48,
 };
 
 const textSizeMap = {
@@ -38,12 +45,15 @@ export default function ToolLogo({ url, icon, name, logoUrl, size = "md" }: Tool
 
   if (logoSrc && !imgError) {
     return (
-      <img
+      <Image
         src={logoSrc}
         alt={`${name} logo`}
+        width={imageSizeMap[size]}
+        height={imageSizeMap[size]}
         className={`${sizeMap[size]} rounded-lg object-contain`}
         onError={() => setImgError(true)}
         loading="lazy"
+        unoptimized
       />
     );
   }
