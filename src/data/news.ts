@@ -10,10 +10,50 @@ export interface NewsItem {
 }
 
 // 快讯数据 - 由 scripts/fetch-news.mjs 自动更新
-// 最后更新时间: 2026-08-02 02:29:50 UTC
+// 最后更新时间: 2026-08-03 02:32:12 UTC
 export const news: NewsItem[] = [
   {
     id: "news-001",
+    title: "让Agent在协作中自进化，清华00后博士获千万元融资 | 36氪首发",
+    summary: "文 | 赵京娜 访谈 编辑 | 海若镜 36氪获悉，近日奇点逃逸完成千万级种子轮融资，由星连资本与水木创投联合领投，奇绩创坛跟投。其正在研发AI原生团队协作操作系统Nexus，让人、Agent、任务、知识和工具基于同一份组织状态持续协作，并让系统从每一次协作中有证据地变强。 奇点逃逸创始人兼CEO薛",
+    source: "36kr",
+    sourceUrl: "https://36kr.com",
+    url: "https://36kr.com/p/3919025939246727?f=rss",
+    date: "2026-08-03",
+    category: "industry",
+  },
+  {
+    id: "news-002",
+    title: "8点1氪丨蔡崇信宣布离婚，不涉及出售阿里股份；瑞幸回应员工对嘴喷奶油；IF椰子水市值从126亿暴跌到16亿",
+    summary: "今日热点导览 马斯克关注了DeepSeek的X账号 祥鹏航空回应航班误发过期方便面 OpenAI或将IPO推迟到明年 SpaceX首份财报即将发布 小米多款手机正式涨价 每月10万美元，特朗普“真实社交”售卖“优先访问权” TOP3大新闻 蔡崇信宣布离婚，不涉及出售阿里股份 8月1日，阿里巴巴集团董",
+    source: "36kr",
+    sourceUrl: "https://36kr.com",
+    url: "https://36kr.com/p/3923043072634498?f=rss",
+    date: "2026-08-03",
+    category: "industry",
+  },
+  {
+    id: "news-003",
+    title: "派早报：DeepSeek V4 Flash 正式版发布",
+    summary: "<p>DeepSeek V4 Flash 正式版发布</p><p>特朗普向科技公司频繁索要捐款</p><p>马斯克称从未讨论过出售特斯拉中国业务</p><p>国补调整后终端销售承压</p><p>风投机构重新涌入中国科技领域</p><p>统计显示实体光盘并不能保证游戏长期可玩</p><p>看看就行的简",
+    source: "少数派",
+    sourceUrl: "https://sspai.com",
+    url: "https://sspai.com/post/113014",
+    date: "2026-08-02",
+    category: "product",
+  },
+  {
+    id: "news-004",
+    title: "从拉萨到雅鲁藏布江大峡谷，我的春日西藏游记",
+    summary: "Matrix首页推荐Matrix是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选Matrix最优质的文章，展示来自用户的最真实的体验和观点。文章代表作者个人观点 ...<a href=&#34;https://sspai.com/post/112843&#34",
+    source: "少数派",
+    sourceUrl: "https://sspai.com",
+    url: "https://sspai.com/post/112843",
+    date: "2026-08-02",
+    category: "tutorial",
+  },
+  {
+    id: "news-005",
     title: "「天线宝宝」机器人上门做保洁，200元/小时，纯·人工·智能",
     summary: "具身智能的τ（bushi）",
     source: "量子位",
@@ -23,7 +63,7 @@ export const news: NewsItem[] = [
     category: "product",
   },
   {
-    id: "news-002",
+    id: "news-006",
     title: "奥特曼也逃不过刷TikTok上瘾，Sora背后最抓马的一段来了",
     summary: "狂刷3小时！",
     source: "量子位",
@@ -33,7 +73,7 @@ export const news: NewsItem[] = [
     category: "product",
   },
   {
-    id: "news-003",
+    id: "news-007",
     title: "OpenAI前员工刚跑路就喊话：要套现就赶紧套，别等IPO！",
     summary: "对前沿实验室估值悲观",
     source: "量子位",
@@ -43,7 +83,7 @@ export const news: NewsItem[] = [
     category: "product",
   },
   {
-    id: "news-004",
+    id: "news-008",
     title: "李飞飞World Labs收购SceniX，物理AI训练正从“采数据”走向“造世界”",
     summary: "下一场竞争，是谁能造出更多“有用的世界”",
     source: "量子位",
@@ -51,46 +91,6 @@ export const news: NewsItem[] = [
     url: "https://www.qbitai.com/2026/08/464532.html",
     date: "2026-08-01",
     category: "product",
-  },
-  {
-    id: "news-005",
-    title: "黄仁勋：不玩𝕏是我太内向，现在为AI必须站出来",
-    summary: "三本教科书，救活英伟达",
-    source: "量子位",
-    sourceUrl: "https://www.qbitai.com",
-    url: "https://www.qbitai.com/2026/08/464452.html",
-    date: "2026-08-01",
-    category: "product",
-  },
-  {
-    id: "news-006",
-    title: "9点1氪丨马斯克回应特斯拉剥离中国业务；国内航线燃油附加费将再次下调；中国最高薪本科专业易主",
-    summary: "今日热点导览 字节跳动发布视频创作模型Seedance 2.5 长鑫科技市值突破4万亿 人形机器人现“电量焦虑”，行业正在积极探索换电等不同路线 韩国KOSPI指数上涨18% Anthropic称AI模型在测试期间误侵三家真实机构系统 TOP3大新闻 马斯克回应特斯拉剥离中国业务 7月31日，对于特",
-    source: "36kr",
-    sourceUrl: "https://36kr.com",
-    url: "https://36kr.com/p/3920241240419720?f=rss",
-    date: "2026-08-01",
-    category: "industry",
-  },
-  {
-    id: "news-007",
-    title: "国内唯一做多模态长记忆的公司，融资数千万，押注主动智能｜涌现新项目",
-    summary: "文｜王欣逸 编辑｜张雨忻 一句话介绍 国内唯一做多模态长记忆的公司——丘脑智能，推出原生多模态记忆基座，押注AI从通用走向个性化，最终走向主动智能。 主动智能，指的是AI能在足够了解用户的基础上，在合适的时间、以恰当的方式主动跟用户交互。要实现主动智能，Memory是必须要跨过的门槛。 融资情况 近",
-    source: "36kr",
-    sourceUrl: "https://36kr.com",
-    url: "https://36kr.com/p/3919386961177985?f=rss",
-    date: "2026-07-31",
-    category: "industry",
-  },
-  {
-    id: "news-008",
-    title: "36氪独家｜曾爱玲入职B站担任AI视频生成业务负责人，向CEO陈睿汇报",
-    summary: "文｜王毓婵 兰杰 编辑｜乔芊 36氪独家获悉，曾爱玲入职哔哩哔哩（下称“B站”），担任AI视频生成业务负责人，向CEO陈睿汇报。 36氪就此事向B站方面求证，对方暂无回应。 曾爱玲 B站此前已公开表示，AI投入主要聚焦视频理解、视频推荐和辅助视频创作等方向。曾爱玲入职后，或将参与相关业务。 曾爱玲的",
-    source: "36kr",
-    sourceUrl: "https://36kr.com",
-    url: "https://36kr.com/p/3910776673064073?f=rss",
-    date: "2026-07-31",
-    category: "industry",
   }
 ];
 
