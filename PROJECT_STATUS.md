@@ -40,13 +40,19 @@ sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts`
 
 ## 线上状态
 
+截至 2026-08-05 17:20（本轮修复部署完成后实测）：
+
 | 项 | 值 |
 |---|---|
 | 首页 | HTTP 200 |
 | `/news/` | HTTP 200 |
 | `/tool/chatgpt/` | HTTP 200 |
 | `/sitemap.xml` | HTTP 200 |
-| 线上内容版本 | 已随本轮修复更新至最新（详见执行报告） |
+| `Last-Modified` | `Wed, 05 Aug 2026 09:14:25 GMT`（修复前长期停留在 `Wed, 01 Jul 2026 13:02:44 GMT`） |
+| 线上快讯日期 | 2026-08-04 / 2026-08-05（修复前停留在 2026-06-30 / 2026-07-01） |
+| 线上 sitemap | 597 条 URL，`lastmod` 均为 2026-08-05（修复前冻结在 2026-06-27） |
+
+持续 35 天的「仓库每天更新、线上纹丝不动」状态已解除。
 
 ## 已知问题
 
@@ -83,6 +89,10 @@ sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts`
 已完成：本地 main 由 `9ea32f2` fast-forward 同步至 `36a3484`；lint 与完整 build 双双通过，确认当前 main 可构建；将部署逻辑抽为可复用工作流 `deploy-pages.yml`，由 `deploy.yml`（人工 push）与 `update-news.yml`（快讯自动更新）共同调用，彻底摆脱对 bot push 触发 push 工作流的依赖；补齐 README、PROJECT_STATUS、DEPLOYMENT 三份文档。
 
 未引入 PAT，未新增任何 Secret，未修改 `tools.ts`，未增加新功能或新页面，未升级依赖，未删除历史分支或工作流。
+
+验证状态需要区分两条链路。**人工 push 链路已实测通过**：提交 `94c6c32` 触发 `Deploy to GitHub Pages`（run id `30992326374`），`build` 与 `deploy` 两个 job 均以 `deploy /` 前缀执行成功，证明可复用工作流被正确调用，线上 `Last-Modified` 与快讯内容随之更新。**快讯自动链路目前为结构性验证**：`deploy` job 的 `needs` 依赖、`if` 条件与 `outputs.changed` 输出链已逐项核对无误，且与人工链路共用同一份经实测的部署实现，但尚未经历一次真实的定时运行。
+
+因此需要在**下一次定时快讯更新（每日 UTC 00:00，即北京时间 08:00 前后）之后复核一次**：确认 `Auto Update AI News` 运行中出现 `deploy` job 且未被跳过，并确认线上 `Last-Modified` 再次前移。该复核完成前，自动链路不应被视为已完全验证。
 
 ## 下一项候选任务
 
