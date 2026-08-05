@@ -8,6 +8,9 @@ name: Deploy to GitHub Pages
 # 已知平台行为：GitHub Actions 使用默认 GITHUB_TOKEN 推送的提交
 # 不会再次触发 push 事件（防递归保护）。因此 update-news.yml 的
 # bot 提交不会经过本文件，而是由该工作流自身直接调用 deploy-pages.yml。
+#
+# 部署目标显式传递本次事件对应的完整 commit SHA（github.sha），
+# 不依赖 checkout 的默认行为，也不使用模糊的分支名 main。
 
 on:
   push:
@@ -22,3 +25,5 @@ permissions:
 jobs:
   deploy:
     uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ github.sha }}

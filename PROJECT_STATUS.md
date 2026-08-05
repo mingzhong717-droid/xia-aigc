@@ -1,6 +1,6 @@
 # 项目状态（PROJECT_STATUS）
 
-> 最后更新：2026-08-05，由任务 XIA-RECOVERY-FIX-001 建立。
+> 最后更新：2026-08-05，由任务 XIA-RECOVERY-FIX-001 建立；由 XIA-RECOVERY-FIX-002-A / 002-B 修订（部署目标精确 SHA 传递修复）。
 >
 > 本文件记录项目的当前真实状态。**每次影响线上或部署链路的改动后都应更新**，尤其是「线上状态」一节——本项目历史上正是因为缺少这类记录，导致部署中断 35 天无人察觉。
 
@@ -20,10 +20,12 @@
 
 | 项 | 值 |
 |---|---|
-| 本轮同步前 HEAD | `9ea32f2`（2026-07-01，最后一次人工提交） |
-| 本轮同步后 HEAD | `36a3484`（2026-08-05，快讯自动提交） |
-| 本轮修复提交 | `6285aa1`（见下方「本轮修复结果」） |
-| 本地与远端 | 已同步 |
+| FIX-001 同步前 HEAD | `9ea32f2`（2026-07-01，最后一次人工提交） |
+| FIX-001 同步后 HEAD | `36a3484`（2026-08-05，快讯自动提交） |
+| FIX-001 修复提交 | `6285aa1` |
+| 当前 HEAD | `9be312b`（与 `origin/main` 一致） |
+| FIX-002-A/B 修复提交 | 待推送验证后回填 |
+| 本地与远端 | 以本文件末尾「最终 Git 状态」为准 |
 
 ## 构建状态
 
@@ -36,7 +38,32 @@
 | 其他路由 | 17 |
 | sitemap 声明 URL | 597（12 静态 + 585 工具） |
 
-sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts` 中的重复 ID，详见下方 P1 问题。
+### 页面数量差额的准确口径
+
+基础数据：
+
+```
+工具总记录：585
+唯一工具 ID：542
+重复超额记录：43
+sitemap URL：597
+实际静态页面：559
+```
+
+差额由**两部分**构成，不能只用重复 ID 解释：
+
+```
+总差额：597 - 559 = 38
+
+工具部分相差：585 - 542 = 43
+非工具页面口径相差：17 - 12 = 5（实际产出比 sitemap 多 5 项）
+
+最终：43 - 5 = 38
+```
+
+即 sitemap 只登记了 12 个静态路由，而实际构建产出 17 个非工具页面（含 `/_not-found`、`/api-transit` 等未入 sitemap 白名单的页面），这部分反向抵消了 5 项。
+
+**术语注意：**上述 43 指的是「重复超额记录数」（585 - 542），**不是「43 个重复 ID 分组」**。当前重复 ID 的分组数量尚未做专项统计，**待数据治理任务确认**。
 
 ## 线上状态
 
@@ -54,21 +81,35 @@ sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts`
 
 持续 35 天的「仓库每天更新、线上纹丝不动」状态已解除。
 
+需要注意：上述线上状态对应的是 `9be312b`，即 FIX-002-A/B 修复推送之前的版本。修复推送后的实测结果记录在下方「精确 SHA 部署验证」一节。
+
 ## 已知问题
 
-### P0 — 已在本轮修复
+### P0 — 已在 FIX-001 修复
 
 **部署链路静默中断。** 2026-07-01 至 2026-08-05 共 35 天，AI 快讯工作流每天成功提交，但线上始终停留在 7 月 1 日版本。根因是 GitHub Actions 使用默认 `GITHUB_TOKEN` 推送的提交不会触发 `push` 事件，而当时部署完全依赖 `on: push`。两个工作流状态全程绿色，无任何告警。
 
-本轮已通过将部署抽为可复用工作流、由快讯工作流显式调用的方式修复。详见 [DEPLOYMENT.md](./DEPLOYMENT.md)。
+已通过将部署抽为可复用工作流、由快讯工作流显式调用的方式修复。详见 [DEPLOYMENT.md](./DEPLOYMENT.md)。
 
 **本地落后远端 35 个提交。** 已通过 fast-forward 同步解决。
 
+### P0 — FIX-002-A 发现，修复方案已实施
+
+**自动链路可能部署旧 SHA。** FIX-001 恢复了「部署会被调用」，但遗留了第二个结构性问题：`workflow_call` 默认继承调用方触发时的上下文，`actions/checkout` 不指定 `ref` 时取到的是**定时任务启动时的旧 SHA**。而 bot commit 是在 job 运行期间才产生的，因此部署构建的可能是不包含当日快讯的旧快照。
+
+危害在于它比上一个问题更难发现：commit 推送成功、部署执行成功、`Last-Modified` 也确实前移（确实重新构建发布了一次），**但页面快讯依然是旧的**。
+
+本轮已在本地通过显式 SHA 输入机制修复：`deploy-pages.yml` 增加必填输入 `ref` 与 `Verify checkout SHA` 校验步骤；`deploy.yml` 传入 `github.sha`；`update-news.yml` 把实际提交并成功 push 的 SHA 通过 job output 传给部署。
+
+人工 push 链路的精确 SHA 验证结果见下方「精确 SHA 部署验证」一节。自动快讯链路的结构修复已随同一提交入库，但仍需一次**真实产生新闻变化的 scheduled run** 才能完成验收。
+
 ### P1 — 待处理
 
-**`tools.ts` 数据重复（下一项应优先处理）。** 585 条 `id` 记录中存在 **43 个重复 ID**（cursor、perplexity、gamma、grammarly、heygen、elevenlabs、canva-ai、figma-ai、windsurf、trae、metaso、jimeng、vidu 等主流工具均在其中），另有 **72 组重复 URL**（`https://chatglm.cn` 出现 3 次，`chat.openai.com`、`chat.deepseek.com`、`cursor.com`、`character.ai` 等各 2 次）。
+**`tools.ts` 数据重复（下一项应优先处理）。** 585 条工具记录中，唯一 `id` 仅 542 个，即存在 **43 条重复超额记录**（cursor、perplexity、gamma、grammarly、heygen、elevenlabs、canva-ai、figma-ai、windsurf、trae、metaso、jimeng、vidu 等主流工具均在其中），另有 **72 组重复 URL**（`https://chatglm.cn` 出现 3 次，`chat.openai.com`、`chat.deepseek.com`、`cursor.com`、`character.ai` 等各 2 次）。
 
-影响有三层。用户侧，列表与搜索结果出现同名工具重复。SEO 侧，sitemap 声明 597 条 URL 而实际只生成 559 个页面，重复 `<loc>` 属搜索引擎不友好信号。数据侧，对外宣称的「585+」实际虚高约 43，去重后约 542 个唯一工具，而该数字出现在 `layout.tsx` 的 title、description、OG 标签及 `public/ai.txt` 中。
+> 术语注意：43 是**重复超额记录数**（585 - 542），不等于重复 ID 的分组数量。分组数量**待数据治理任务确认**。
+
+影响有三层。用户侧，列表与搜索结果出现同名工具重复。SEO 侧，sitemap 声明 597 条 URL 而实际只生成 559 个页面（差额构成见上方「页面数量差额的准确口径」），重复 `<loc>` 属搜索引擎不友好信号。数据侧，对外宣称的「585+」实际虚高 43，去重后为 542 个唯一工具，而该数字出现在 `layout.tsx` 的 title、description、OG 标签及 `public/ai.txt` 中。
 
 **PWA 图标形同虚设。** `manifest.json` 声明的 64/32/24/16、192×192(maskable)、512×512(any) 三组图标 `src` 全部指向同一个 `/favicon.ico`，实际安装到桌面时图标会模糊或降级。同时 manifest 的 description 仍写「500+」，与 `layout.tsx` 的「585+」自相矛盾。
 
@@ -76,7 +117,7 @@ sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts`
 
 **Google Search Console 未接入。** `layout.tsx` 中 `google-site-verification` meta 仍是注释状态的 `YOUR_CODE` 占位，public 下也无对应验证文件。Google 侧的索引覆盖率、抓取错误、搜索表现数据全部不可见。百度站长验证已通过 `public/baidu_verify_codeva-T80nU8gVJU.html` 正常接入。
 
-**零测试、零数据校验。** 无测试文件、无测试依赖、CI 中无任何测试或数据校验环节。上述 43 个重复 ID 之所以能长期存在且直到专项审计才被发现，正是因为没有任何自动化关卡会拦截它。
+**零测试、零数据校验。** 无测试文件、无测试依赖、CI 中无任何测试或数据校验环节。上述 43 条重复记录之所以能长期存在且直到专项审计才被发现，正是因为没有任何自动化关卡会拦截它。
 
 ### P2 — 后续优化
 
@@ -94,12 +135,57 @@ sitemap 的 597 与实际生成的 559 之间存在差额，根源是 `tools.ts`
 
 因此需要在**下一次定时快讯更新（每日 UTC 00:00，即北京时间 08:00 前后）之后复核一次**：确认 `Auto Update AI News` 运行中出现 `deploy` job 且未被跳过，并确认线上 `Last-Modified` 再次前移。该复核完成前，自动链路不应被视为已完全验证。
 
+补充（FIX-002-A）：上述复核除了看 `deploy` job 是否执行、`Last-Modified` 是否前移，还必须额外比对 **bot commit SHA = requested SHA = checkout SHA**，并直接核对线上 `/news/` 页面的快讯日期。仅凭绿灯与 `Last-Modified` 不足以证明新内容已上线。
+
+## 本轮修复结果（XIA-RECOVERY-FIX-002-A）
+
+**性质：本地实施与验证，不提交、不推送、不部署。**
+
+修复对象是 FIX-001 遗留的结构性风险：自动链路可能 checkout 定时任务启动时的旧 SHA，从而发布不包含当日快讯的旧快照。
+
+已修改五个文件：`deploy-pages.yml`（新增必填输入 `ref`、checkout 显式使用该 SHA、新增 `Verify checkout SHA` 校验步骤）、`deploy.yml`（传入 `github.sha`）、`update-news.yml`（commit 步骤增加 `id`，push 成功后输出 SHA，新增 job output `commit_sha`，deploy 传入该 SHA）、`DEPLOYMENT.md`、`PROJECT_STATUS.md`。
+
+本地验证：lint 通过（退出码 0，零 error 零 warning）；build 通过（退出码 0，559 个静态页面）；三个工作流的触发器、调用关系、ref 来源与递归安全性均已逐项校验。
+
+未修改 `tools.ts`，未修改 `src/` 下任何文件，未修改依赖，未新增 Secret 或 PAT。
+
+本节记录的是本轮修复方案及其验证要求。实际修复提交 SHA、GitHub Actions run 和人工 push 部署结果，记录在下方「精确 SHA 部署验证（XIA-RECOVERY-FIX-002-B）」一节。
+
+## 精确 SHA 部署验证（XIA-RECOVERY-FIX-002-B）
+
+待推送与实测完成后回填。
+
+### 自动快讯链路
+
+⚠️ 结构修复已提交，仍待一次真实产生新闻变化的 scheduled run 验证。
+
+人工 push 链路的验证**不能替代**自动链路验证。两者虽共用同一份 `deploy-pages.yml`，但 ref 来源不同：人工链路用 `github.sha`，自动链路用 commit step 输出的 `commit_sha`——后者的正确性只有在真实产生 bot commit 时才能被检验。
+
+### 自动链路待验收清单
+
+下一次定时任务运行后，需逐项确认：
+
+1. `news.ts` 确实发生变化；
+2. workflow 产生新的 bot commit；
+3. commit step output 等于 bot commit SHA；
+4. `deploy` job 未被跳过；
+5. requested SHA 等于 bot commit SHA；
+6. checkout SHA 等于 bot commit SHA；
+7. build 与 deploy 均成功；
+8. 线上 `/news/` 出现本次新增快讯。
+
+若当次定时任务无内容变化，`deploy` 被 skip 是**正确结果**，但不能作为「有变化链路已验证」的证据。
+
+## 最终 Git 状态
+
+待本轮推送完成后回填。
+
 ## 下一项候选任务
 
 **唯一推荐的下一项：`tools.ts` 工具数据去重与质量治理。**
 
-理由是它在当前所有待办中价值密度最高。数据是本站的核心资产，43 个重复 ID 同时损害用户体验、SEO 质量信号和对外数据可信度，且已经造成 sitemap 与实际产物不一致这一可量化的问题。部署链路本轮已恢复，修好的数据能够立即发布上线，不存在做完发不出去的情况。
+理由是它在当前所有待办中价值密度最高。数据是本站的核心资产，43 条重复超额记录同时损害用户体验、SEO 质量信号和对外数据可信度，且已经造成 sitemap 与实际产物不一致这一可量化的问题。部署链路已恢复，修好的数据能够立即发布上线，不存在做完发不出去的情况。
 
-建议范围包括：确定 43 组重复条目的取舍与字段合并规则；处理已被搜索引擎索引的重复 URL（静态导出下需评估 410 或重定向的可行性）；同步修正 `layout.tsx`、`ai.txt`、`manifest.json` 中的工具数量表述；新增一个数据校验脚本并接入 CI，防止同类问题再次沉积。
+建议范围包括：先专项统计重复 ID 的确切分组数量（当前只有「超额 43 条」这一口径）；确定重复条目的取舍与字段合并规则；处理已被搜索引擎索引的重复 URL（静态导出下需评估 410 或重定向的可行性）；同步修正 `layout.tsx`、`ai.txt`、`manifest.json` 中的工具数量表述；新增一个数据校验脚本并接入 CI，防止同类问题再次沉积。
 
-在该任务完成前，不建议启动 SEO 内容扩展或新功能开发。
+前置条件：先完成 FIX-002-A 的提交与自动链路线上验收。在该任务完成前，不建议启动 SEO 内容扩展或新功能开发。

@@ -12,6 +12,12 @@ name: Auto Update AI News
 #   绿色成功，属于静默失效。此处通过 needs + if 显式串联部署环节。
 #
 # 无变化时 deploy job 会被 if 条件跳过，不会产生空部署。
+#
+# 关于部署目标 SHA：
+#   本工作流在运行期间才会创建新的 bot commit。而 workflow_call 默认
+#   的 checkout 取到的是工作流启动时的旧 SHA，并不包含刚提交的快讯。
+#   若不显式传递，会出现「部署成功但发布的是旧内容」这类隐蔽问题。
+#   因此这里把 commit 步骤实际产生并已成功 push 的 SHA 逐层传给部署。
 
 on:
   schedule:
@@ -28,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.changes.outputs.changed }}
+      commit_sha: ${{ steps.commit.outputs.sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,13 +53,21 @@ jobs:
           git diff --quiet src/data/news.ts || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push
+        id: commit
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/news.ts
           git commit -m "chore: 自动更新 AI 快讯 $(date +%Y-%m-%d)"
+
+          NEW_SHA="$(git rev-parse HEAD)"
           git push
+
+          # 只有 push 成功后才写出 SHA。若 push 失败，shell 会因非零退出码
+          # 中断本步骤，该赋值不会执行，job 失败，部署不会拿到一个
+          # 并未推送到远端的 commit 作为部署目标。
+          echo "sha=$NEW_SHA" >> "$GITHUB_OUTPUT"
 
   # 快讯有更新时才部署。复用与人工 push 相同的部署实现。
   deploy:
@@ -63,3 +78,5 @@ jobs:
       pages: write
       id-token: write
     uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ needs.update-news.outputs.commit_sha }}

@@ -11,9 +11,21 @@ name: Reusable Deploy to GitHub Pages
 #   - update-news.yml  （每日快讯更新成功提交后）
 #
 # 注意：本文件不得添加 push 触发器，否则会与调用方形成重复部署。
+#
+# 关于 ref 输入：
+#   workflow_call 被调用时，默认的 checkout 取到的是「调用方工作流启动时」
+#   的那个 commit，而不是运行期间新产生的 commit。对于快讯自动更新链路，
+#   bot 是在 job 运行过程中才创建新 commit 的，若不显式指定 ref，就会
+#   构建并发布旧版本代码——表面成功，内容却是旧的。
+#   因此这里要求调用方必须传入完整 commit SHA，并在 checkout 后校验。
 
 on:
   workflow_call:
+    inputs:
+      ref:
+        description: Commit SHA to deploy
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -32,6 +44,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      # 双重确认：请求部署的 SHA 与实际检出的 SHA 必须完全一致。
+      # 不一致说明部署目标发生了偏移，此时宁可失败也不要发布错误版本。
+      - name: Verify checkout SHA
+        shell: bash
+        run: |
+          ACTUAL_SHA="$(git rev-parse HEAD)"
+          echo "Requested deploy SHA: ${{ inputs.ref }}"
+          echo "Actual checkout SHA:  $ACTUAL_SHA"
+
+          if [ "$ACTUAL_SHA" != "${{ inputs.ref }}" ]; then
+            echo "Checkout SHA does not match requested deploy SHA."
+            exit 1
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

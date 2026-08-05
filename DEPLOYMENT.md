@@ -1,6 +1,6 @@
 # 部署说明（DEPLOYMENT）
 
-> 最后更新：2026-08-05，由任务 XIA-RECOVERY-FIX-001 建立。
+> 最后更新：2026-08-05，由任务 XIA-RECOVERY-FIX-001 建立；由 XIA-RECOVERY-FIX-002-A 补充部署目标 SHA 的精确传递机制。
 
 ## 架构总览
 
@@ -34,25 +34,29 @@ GitHub Pages（源站，经 Fastly 分发）
 │  deploy.yml                                              │
 │    on: push(main) / workflow_dispatch                    │
 │         │  uses: ./.github/workflows/deploy-pages.yml    │
+│         │  with: ref = ${{ github.sha }}                 │
 │         └──────────────┐                                 │
 └────────────────────────┼─────────────────────────────────┘
                          │
                          ▼
-              ┌────────────────────────────┐
-              │  deploy-pages.yml          │
-              │  （可复用工作流）           │
-              │  on: workflow_call 只此一种 │
-              │                            │
-              │  job build:                │
-              │    checkout → node 20      │
-              │    → npm install           │
-              │    → npm run build         │
-              │    → .nojekyll + CNAME     │
-              │    → upload-pages-artifact │
-              │  job deploy:               │
-              │    → deploy-pages@v4       │
-              │    环境 github-pages       │
-              └────────────────────────────┘
+              ┌───────────────────────────────────┐
+              │  deploy-pages.yml                 │
+              │  （可复用工作流）                 │
+              │  on: workflow_call 只此一种       │
+              │  inputs.ref：必填，完整 commit SHA│
+              │                                   │
+              │  job build:                       │
+              │    checkout(ref = inputs.ref)     │
+              │    → Verify checkout SHA ★        │
+              │    → node 20 → npm install        │
+              │    → npm run build                │
+              │    → .nojekyll + CNAME            │
+              │    → upload-pages-artifact        │
+              │  job deploy:                      │
+              │    → deploy-pages@v4              │
+              │    环境 github-pages              │
+              └───────────────────────────────────┘
+                 ★ requested SHA ≠ checkout SHA 时立即失败
                          ▲
 ┌────────────────────────┼─────────────────────────────────┐
 │  自动链路               │                                 │
@@ -62,11 +66,12 @@ GitHub Pages（源站，经 Fastly 分发）
 │         │                                                │
 │    job update-news:                                      │
 │      抓 RSS → 写 news.ts → git diff 判定                  │
-│      有变化则 bot commit & push                           │
-│      输出 outputs.changed                                │
+│      有变化则 bot commit → 取 SHA → push                 │
+│      push 成功后才输出 outputs.changed / commit_sha       │
 │         │                                                │
 │    job deploy:  needs: update-news                       │
-│                 if: changed == 'true' ────────┘          │
+│                 if: changed == 'true'                    │
+│                 with: ref = outputs.commit_sha ─────┘    │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -83,6 +88,39 @@ GitHub Pages（源站，经 Fastly 分发）
 `update-news.yml` 每天定时运行。抓取到新内容并成功提交后，`deploy` job 依据 `needs.update-news.outputs.changed == 'true'` 条件在**同一次工作流运行内**直接调用 `deploy-pages.yml`。
 
 若当天 RSS 无更新或抓取失败，`changed` 不为 `true`，`deploy` job 被跳过，不产生空部署。
+
+## 部署目标 SHA 的精确传递
+
+这是继「bot push 不触发 push 工作流」之后的**第二个结构性陷阱**。两者同样隐蔽，同样会让工作流亮绿灯而线上内容不对。
+
+### 问题
+
+`workflow_call` 被调用时，被调用的工作流默认继承**调用方工作流触发时的上下文**。`actions/checkout` 在不写 `ref` 时，取到的就是那个时间点的 commit。
+
+对人工 push 链路而言这不构成问题，因为触发时的 commit 恰好就是要发布的 commit。
+
+但**快讯自动链路完全不同**。它由 schedule 触发，启动那一刻仓库 HEAD 还停在前一天；bot commit 是在 job **运行过程中**才被创建出来的。如果部署时不显式指定新 SHA，就会去构建一个**不包含今天快讯的旧快照**。
+
+最麻烦的是它的表现：commit 推送成功、部署 job 执行成功、线上 `Last-Modified` 也确实前移了（毕竟真的重新构建发布了一次），**但页面上的快讯依然是旧的**。
+
+由此得出一条验收原则：**仅凭工作流绿灯和 `Last-Modified` 前移，不足以证明新内容已经上线。**
+
+### 解法
+
+`deploy-pages.yml` 声明了一个**必填**的字符串输入 `ref`，调用方必须传入完整 commit SHA——不接受省略，也不使用模糊的分支名 `main`（分支名会随时间漂移，无法锁定具体快照）：
+
+| 链路 | ref 来源 |
+|---|---|
+| 人工 push | `${{ github.sha }}`，即本次 push 事件对应的 commit |
+| 快讯自动 | `needs.update-news.outputs.commit_sha`，即 commit 步骤**实际产生并已成功 push** 的 SHA |
+
+`actions/checkout` 显式使用 `ref: ${{ inputs.ref }}`，随后由 `Verify checkout SHA` 步骤做强校验：把请求部署的 SHA 与 `git rev-parse HEAD` 得到的实际 SHA 逐字符比对，**不一致则立即 `exit 1` 使构建失败**。宁可部署报错，也不能静默地发布错误版本。
+
+### push 失败时的行为
+
+commit 步骤内部的顺序是有意安排的：先 `git commit`，再用 `git rev-parse HEAD` 取 SHA，接着 `git push`，**最后**才把 SHA 写入 `$GITHUB_OUTPUT`。
+
+若 `git push` 失败（例如远端已有新提交导致拒推），非零退出码会直接中断整个步骤，`echo "sha=..."` 根本不会执行。于是 `commit_sha` 为空、`update-news` job 失败、`deploy` job 因 `needs` 失败而不启动。这保证了**绝不会把一个尚未推送到远端的 commit 当成部署目标**（退一步讲，即使真传了这样的 SHA，checkout 也找不到它，依然会失败）。
 
 ## 为什么不能依赖 push 触发自动部署
 
@@ -101,7 +139,7 @@ GitHub Actions 有一条平台级防递归规则：**使用默认 `GITHUB_TOKEN`
 | 工作流 | 权限 | 用途 |
 |---|---|---|
 | `deploy.yml` | `contents: read`、`pages: write`、`id-token: write` | 读代码、发布 Pages、OIDC 身份验证 |
-| `deploy-pages.yml` | 同上 | 可复用工作流自身声明，调用时生效 |
+| `deploy-pages.yml` | 同上 | 可复用工作流自身声明，调用时生效；另要求必填输入 `ref` |
 | `update-news.yml` · job `update-news` | `contents: write` | 提交并推送 `news.ts` |
 | `update-news.yml` · job `deploy` | `contents: read`、`pages: write`、`id-token: write` | 在 job 级单独降权声明，供部署使用 |
 
@@ -134,13 +172,24 @@ https://aigc778.top/tool/chatgpt/
 https://aigc778.top/sitemap.xml
 ```
 
-**其三，`Last-Modified` 响应头已前移。** 这是最关键的一项。工作流绿灯只能证明流程跑完，`Last-Modified` 变化才能证明新产物真正落到了线上。
+**其三，SHA 三者一致。** 展开 `build` job 的 `Verify checkout SHA` 步骤日志，确认两行输出相同：
+
+```
+Requested deploy SHA: <sha>
+Actual checkout SHA:  <sha>
+```
+
+对自动链路还要额外确认这个 SHA **就是本次 bot commit 的 SHA**（可在 `update-news` job 的 commit 步骤日志或仓库提交历史中比对）。三者对上，才能确定发布的是刚提交的内容而不是旧快照。
+
+**其四，`Last-Modified` 响应头已前移。**
 
 ```powershell
 (Invoke-WebRequest -Uri "https://aigc778.top" -Method Head).Headers['Last-Modified']
 ```
 
-**其四，内容确实更新。** 例如访问 `/news/` 页面，确认其中的快讯日期为近期日期，而非某个固定的历史日期。
+**其五，内容确实更新。** 访问 `/news/` 页面，确认其中的快讯日期为近期日期，而非某个固定的历史日期。
+
+> 特别提醒：**不能只凭工作流绿灯和 `Last-Modified` 前移就判定新内容已部署。** 如果部署拿到的是旧 SHA，构建依然会成功、`Last-Modified` 依然会前移，但页面内容是旧的。必须把第三项（SHA 一致）和第五项（内容核对）一并检查。
 
 ## 静默失效风险
 
@@ -155,6 +204,8 @@ https://aigc778.top/sitemap.xml
 **sitemap 的 `lastmod` 停滞。** `generate-sitemap.js` 在每次 build 时把 `lastmod` 写为当日日期。如果部署停摆，线上 sitemap 的日期会一直冻结，向搜索引擎持续释放「站点已停更」的信号。这既是后果，也是一个便于观察的先行指标。
 
 **Cloudflare 缓存掩盖更新。** 源站已更新但边缘节点仍在返回旧副本时，可能造成「部署成功但看不到变化」的错觉。排查时可对比 `cf-cache-status` 响应头，或改用带随机查询参数的 URL 验证。
+
+**部署了旧 SHA。** 若将来有人把 `deploy-pages.yml` 的 `ref` 输入改回可选、删除 `Verify checkout SHA` 步骤，或把调用方的 `with: ref` 去掉，快讯自动链路会重新退化为「构建旧快照」。这类回退不会报错，只会让线上快讯永远滞后一天。修改部署相关工作流时，请务必保留 `ref` 必填约束与 SHA 校验步骤。
 
 ## 相关文件
 
