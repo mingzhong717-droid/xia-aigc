@@ -23,8 +23,7 @@
 | FIX-001 同步前 HEAD | `9ea32f2`（2026-07-01，最后一次人工提交） |
 | FIX-001 同步后 HEAD | `36a3484`（2026-08-05，快讯自动提交） |
 | FIX-001 修复提交 | `6285aa1` |
-| 当前 HEAD | `9be312b`（与 `origin/main` 一致） |
-| FIX-002-A/B 修复提交 | 待推送验证后回填 |
+| FIX-002-A/B 修复提交 | `845dc17`（精确 SHA 部署修复） |
 | 本地与远端 | 以本文件末尾「最终 Git 状态」为准 |
 
 ## 构建状态
@@ -153,7 +152,42 @@ sitemap URL：597
 
 ## 精确 SHA 部署验证（XIA-RECOVERY-FIX-002-B）
 
-待推送与实测完成后回填。
+### 人工 push 链路
+
+**✅ 已完成精确 SHA 实测验证。**
+
+| 验证项 | 实测值 |
+|---|---|
+| 修复提交 SHA | `845dc1720d4ef428f76e47bb8184fcc99aa18ec5` |
+| 提交信息 | `fix(ci): deploy the exact commit SHA` |
+| Actions run ID | `30997635397` |
+| workflow | Deploy to GitHub Pages（`.github/workflows/deploy.yml`） |
+| event | `push` |
+| run_attempt | 1 |
+| run head_sha | `845dc1720d4ef428f76e47bb8184fcc99aa18ec5` |
+| `deploy / build` | success（9 个业务 step 全部 success） |
+| `Verify checkout SHA` step | **success** |
+| `deploy / deploy` | success |
+| Pages deployment id | `5759958243` |
+| **deployment.sha** | **`845dc1720d4ef428f76e47bb8184fcc99aa18ec5`** |
+| deployment 最终 state | `success` |
+
+**SHA 一致性结论：commit SHA = run head_sha = deployment.sha = `845dc172...`，三者完全相等（完整 40 位）。** `Verify checkout SHA` 步骤 success 证明 requested SHA 与 checkout 实际 SHA 也相等——该步骤的唯一逻辑就是两者不等则 `exit 1`，因此它通过即等价于断言成立。
+
+未出现 fallback 到 `main`，未出现 Secret、PAT 或权限错误。
+
+### 线上验证（第一提交后）
+
+| 路由 | 状态 | Last-Modified |
+|---|---|---|
+| `/` | 200 | `Wed, 05 Aug 2026 10:30:47 GMT` |
+| `/news/` | 200 | 同上 |
+| `/tool/chatgpt/` | 200 | 同上 |
+| `/sitemap.xml` | 200 | 同上 |
+
+页面内容正常加载（首页 112 KB、快讯页 26 KB、详情页 71 KB，title 均正确），无 404 / 500 / 应用错误，无静态资源异常。线上 sitemap 597 条 URL、`lastmod` 均为 2026-08-05；`/news/` 快讯日期为 2026-08-04 / 2026-08-05。
+
+需要说明：本次技术提交未修改网站业务内容，因此人工链路的**决定性证据是 SHA 三者一致**；`Last-Modified` 前移与线上 200 仅为补充证据，不能代替 SHA 校验。
 
 ### 自动快讯链路
 
@@ -178,7 +212,14 @@ sitemap URL：597
 
 ## 最终 Git 状态
 
-待本轮推送完成后回填。
+截至 XIA-RECOVERY-FIX-002-B 完成：
+
+| 项 | 值 |
+|---|---|
+| 分支 | `main` |
+| 本轮提交一 | `845dc17` — fix(ci): deploy the exact commit SHA |
+| 本轮提交二 | 见下方回填 |
+| 工作区 | 干净 |
 
 ## 下一项候选任务
 
