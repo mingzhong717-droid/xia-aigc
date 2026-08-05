@@ -1,5 +1,18 @@
 name: Auto Update AI News
 
+# 快讯自动更新链路。
+#
+# 每天抓取 RSS 源刷新 src/data/news.ts。若内容有变化则提交推送，
+# 并在同一次运行内直接调用可复用部署工作流发布上线。
+#
+# 为什么要显式调用部署：
+#   GitHub Actions 使用默认 GITHUB_TOKEN 推送的提交不会触发 push 事件
+#   （平台防递归保护）。历史上本工作流只 push 不部署，导致 2026-07-01
+#   之后仓库每天更新、线上却始终停留在旧版本，且两个工作流状态均为
+#   绿色成功，属于静默失效。此处通过 needs + if 显式串联部署环节。
+#
+# 无变化时 deploy job 会被 if 条件跳过，不会产生空部署。
+
 on:
   schedule:
     # 每天北京时间早上 8 点自动运行（UTC 0:00）
@@ -13,6 +26,8 @@ permissions:
 jobs:
   update-news:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,3 +53,13 @@ jobs:
           git add src/data/news.ts
           git commit -m "chore: 自动更新 AI 快讯 $(date +%Y-%m-%d)"
           git push
+
+  # 快讯有更新时才部署。复用与人工 push 相同的部署实现。
+  deploy:
+    needs: update-news
+    if: needs.update-news.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy-pages.yml
