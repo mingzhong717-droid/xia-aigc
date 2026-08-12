@@ -11,7 +11,11 @@ import TrafficModal from "@/components/TrafficModal";
 import SubmitToolModal from "@/components/SubmitToolModal";
 import HomeJsonLd from "@/components/HomeJsonLd";
 import SceneEntries from "@/components/SceneEntries";
+import { dedupeToolsById } from "@/lib/dedupeToolsById";
 import { useDarkMode } from "@/hooks/useDarkMode";
+
+// 侧边栏分类计数使用唯一 ID 口径，与 ToolGridSection 的展示数量保持一致。
+const uniqueTools = dedupeToolsById(tools);
 
 export default function HomePageClient() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -32,7 +36,7 @@ export default function HomePageClient() {
   };
 
   const toolCounts = categories.reduce((acc, cat) => {
-    acc[cat.id] = tools.filter((t) => t.category === cat.id).length;
+    acc[cat.id] = uniqueTools.filter((t) => t.category === cat.id).length;
     return acc;
   }, {} as Record<string, number>);
 
