@@ -23,12 +23,16 @@ while ((match = idRegex.exec(toolsSection)) !== null) {
   toolIds.push(match[1]);
 }
 
+// Deduplicate tool IDs (FIRST_RECORD_WINS) to avoid duplicate tool pages in sitemap
+const uniqueToolIds = [...new Set(toolIds)];
+
 const today = new Date().toISOString().split("T")[0];
 
 // Static pages with their priorities
 const staticPages = [
   { path: "/", changefreq: "daily", priority: "1.0" },
   { path: "/news/", changefreq: "daily", priority: "0.9" },
+  { path: "/api-transit/", changefreq: "weekly", priority: "0.8" },
   { path: "/guide/", changefreq: "weekly", priority: "0.8" },
   { path: "/tutorials/", changefreq: "weekly", priority: "0.8" },
   { path: "/rankings/", changefreq: "weekly", priority: "0.8" },
@@ -58,7 +62,7 @@ for (const page of staticPages) {
 }
 
 // Add tool detail pages
-for (const id of toolIds) {
+for (const id of uniqueToolIds) {
   sitemap += `  <url>
     <loc>${BASE_URL}/tool/${id}/</loc>
     <lastmod>${today}</lastmod>
@@ -75,7 +79,7 @@ sitemap += `</urlset>
 const outputPath = path.join(__dirname, "../public/sitemap.xml");
 fs.writeFileSync(outputPath, sitemap, "utf8");
 
-const totalUrls = staticPages.length + toolIds.length;
+const totalUrls = staticPages.length + uniqueToolIds.length;
 console.log(
-  `Sitemap generated: ${staticPages.length} static pages + ${toolIds.length} tool pages = ${totalUrls} URLs`
+  `Sitemap generated: ${staticPages.length} static pages + ${uniqueToolIds.length} tool pages = ${totalUrls} URLs`
 );

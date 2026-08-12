@@ -3,13 +3,19 @@ import { editorialPicks } from "@/data/editorial";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ToolLogo from "@/components/ToolLogo";
+import { dedupeToolsById } from "@/lib/dedupeToolsById";
+
+// 推荐位统一使用按 id 首条胜出去重后的工具集，
+// 与下方 tools.find() 定位当前工具时取首条的语义保持一致。
+const uniqueTools = dedupeToolsById(tools);
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
-  return tools.map((tool) => ({
+  // 去重后仍是同一批 542 个页面，只是不再重复声明相同的 id。
+  return uniqueTools.map((tool) => ({
     id: tool.id,
   }));
 }
@@ -53,25 +59,25 @@ export default async function ToolPage({ params }: Props) {
   }
 
   const category = categories.find((c) => c.id === tool.category);
-  const similarTools = tools
+  const similarTools = uniqueTools
     .filter(
       (t) => t.category === tool.category && t.id !== tool.id
     )
     .slice(0, 6);
 
   // Find tools in related categories for "你可能还感兴趣"
-  const relatedTools = tools
+  const relatedTools = uniqueTools
     .filter((t) => t.category !== tool.category && t.tags.some((tag) => tool.tags.includes(tag)))
     .slice(0, 4);
 
   // Free alternatives (same category, free, not self)
   const freeAlternatives = !tool.isFree
-    ? tools.filter((t) => t.category === tool.category && t.isFree && t.id !== tool.id).slice(0, 4)
+    ? uniqueTools.filter((t) => t.category === tool.category && t.isFree && t.id !== tool.id).slice(0, 4)
     : [];
 
   // No-VPN alternatives (same category, no VPN needed, not self)
   const noVpnAlternatives = tool.needVPN
-    ? tools.filter((t) => t.category === tool.category && !t.needVPN && t.id !== tool.id).slice(0, 4)
+    ? uniqueTools.filter((t) => t.category === tool.category && !t.needVPN && t.id !== tool.id).slice(0, 4)
     : [];
 
   // Editorial review data

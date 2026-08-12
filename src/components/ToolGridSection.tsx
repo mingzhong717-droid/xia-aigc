@@ -3,10 +3,15 @@
 import { useState, useRef, useMemo, memo } from "react";
 import { tools, categories } from "@/data/tools";
 import ToolCard from "@/components/ToolCard";
+import { dedupeToolsById } from "@/lib/dedupeToolsById";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
 const MemoToolCard = memo(ToolCard);
+
+// 展示层唯一工具集：按 id 首条胜出去重，与详情页 tools.find() 取首条的语义一致。
+// 分类筛选、搜索、收藏过滤、无限滚动与分类计数均以此为公共入口。
+const uniqueTools = dedupeToolsById(tools);
 
 interface ToolGridSectionProps {
   searchQuery: string;
@@ -34,7 +39,7 @@ export default function ToolGridSection({ searchQuery, activeCategory, onCategor
   };
 
   const filteredTools = useMemo(() => {
-    return tools.filter((tool) => {
+    return uniqueTools.filter((tool) => {
       let matchesCategory: boolean;
       if (activeCategory === "all") {
         matchesCategory = true;
@@ -59,6 +64,7 @@ export default function ToolGridSection({ searchQuery, activeCategory, onCategor
       return matchesCategory && matchesSearch && matchesFree && matchesChinese && matchesVPN;
     });
   }, [activeCategory, searchQuery, favorites, filterFree, filterChinese, filterNoVPN]);
+  // uniqueTools 是模块级常量，无需列入依赖
 
   // Use document-level scroll for infinite scroll
   const scrollRef = useRef<HTMLElement | null>(null);
@@ -72,7 +78,7 @@ export default function ToolGridSection({ searchQuery, activeCategory, onCategor
   const displayTools = filteredTools.slice(0, visibleItems.length || 24);
 
   const toolCounts = categories.reduce((acc, cat) => {
-    acc[cat.id] = tools.filter((t) => t.category === cat.id).length;
+    acc[cat.id] = uniqueTools.filter((t) => t.category === cat.id).length;
     return acc;
   }, {} as Record<string, number>);
 
@@ -232,7 +238,7 @@ export default function ToolGridSection({ searchQuery, activeCategory, onCategor
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {(shouldExpand ? displayTools : previewTools).map((tool, index) => (
               <MemoToolCard
-                key={`${tool.id}-${index}`}
+                key={tool.id}
                 tool={tool}
                 index={index}
                 searchQuery={searchQuery}

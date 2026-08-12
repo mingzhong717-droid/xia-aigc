@@ -1,11 +1,14 @@
 "use client";
 
 import { tools, categories } from "@/data/tools";
+import { dedupeToolsById } from "@/lib/dedupeToolsById";
 
 /**
  * 首页 JSON-LD 结构化数据
  * 包含 WebSite（站点信息+搜索功能）和 ItemList（工具列表）
+ * numberOfItems 和 itemListElement 均使用按 id 首条胜出去重后的唯一工具集。
  */
+const uniqueTools = dedupeToolsById(tools);
 export default function HomeJsonLd() {
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -32,8 +35,8 @@ export default function HomeJsonLd() {
     "@type": "ItemList",
     name: "AI工具精选列表",
     description: "精选实用AI工具推荐",
-    numberOfItems: tools.length,
-    itemListElement: tools.slice(0, 30).map((tool, index) => ({
+    numberOfItems: uniqueTools.length,
+    itemListElement: uniqueTools.slice(0, 30).map((tool, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
