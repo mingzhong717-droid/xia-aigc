@@ -85,32 +85,37 @@ export default function RootLayout({
       <body className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
         {children}
 
-        {/* Google Analytics - 替换 G-XXXXXXXXXX 为你的 GA4 测量 ID */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-18CKQ270RT"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-18CKQ270RT');
-          `}
-        </Script>
+        {/* Google Analytics & 百度统计 — 仅生产环境加载，dev 不上报污染线上数据 */}
+        {process.env.NODE_ENV === "production" && (
+          <>
+            {/* Google Analytics - 替换 G-XXXXXXXXXX 为你的 GA4 测量 ID */}
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-18CKQ270RT"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-18CKQ270RT');
+              `}
+            </Script>
 
-        {/* 百度统计 - 替换 YOUR_BAIDU_ID 为你的百度统计 ID */}
-        <Script id="baidu-analytics" strategy="afterInteractive">
-          {`
-            var _hmt = _hmt || [];
-            (function() {
-              var hm = document.createElement("script");
-              hm.src = "https://hm.baidu.com/hm.js?2daae050bab8096d424c3b97bdbf9d5b";
-              var s = document.getElementsByTagName("script")[0];
-              s.parentNode.insertBefore(hm, s);
-            })();
-          `}
-        </Script>
+            {/* 百度统计 - 替换 YOUR_BAIDU_ID 为你的百度统计 ID */}
+            <Script id="baidu-analytics" strategy="afterInteractive">
+              {`
+                var _hmt = _hmt || [];
+                (function() {
+                  var hm = document.createElement("script");
+                  hm.src = "https://hm.baidu.com/hm.js?2daae050bab8096d424c3b97bdbf9d5b";
+                  var s = document.getElementsByTagName("script")[0];
+                  s.parentNode.insertBefore(hm, s);
+                })();
+              `}
+            </Script>
+          </>
+        )}
         <Script id="sw-register" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {
