@@ -2,11 +2,17 @@
 
 import { useState, useMemo } from "react";
 import { tools, categories } from "@/data/tools";
+import { dedupeToolsById } from "@/lib/dedupeToolsById";
 import { editorialPicks } from "@/data/editorial";
 import Link from "next/link";
 import ToolLogo from "@/components/ToolLogo";
 
 const MAX_COMPARE = 3;
+
+// 搜索候选与选中态统一使用去重后的唯一 ID 口径（首条胜出），
+// 与详情页 tools.find 及 ToolGridSection 等展示层保持一致，避免相同
+// tool ID 在 Compare 搜索选择器中重复出现。
+const uniqueTools = dedupeToolsById(tools);
 
 export default function ComparePageClient() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -14,14 +20,14 @@ export default function ComparePageClient() {
   const [showPicker, setShowPicker] = useState(false);
 
   const selectedTools = useMemo(
-    () => selectedIds.map((id) => tools.find((t) => t.id === id)).filter(Boolean),
+    () => selectedIds.map((id) => uniqueTools.find((t) => t.id === id)).filter(Boolean),
     [selectedIds]
   );
 
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
     const q = searchQuery.toLowerCase();
-    return tools
+    return uniqueTools
       .filter(
         (t) =>
           !selectedIds.includes(t.id) &&
@@ -51,7 +57,7 @@ export default function ComparePageClient() {
   ];
 
   const applyPreset = (ids: string[]) => {
-    const validIds = ids.filter((id) => tools.find((t) => t.id === id));
+    const validIds = ids.filter((id) => uniqueTools.find((t) => t.id === id));
     setSelectedIds(validIds);
   };
 
