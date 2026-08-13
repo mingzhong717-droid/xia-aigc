@@ -274,13 +274,13 @@ console.log(`API_TRANSIT_COUNT = ${API_TRANSIT_COUNT}`);
 // ---------------------------------------------------------------------------
 
 const expected = {
-  TOTAL_RECORDS: 585,
+  TOTAL_RECORDS: 542,
   UNIQUE_IDS: 542,
-  DUPLICATE_ID_GROUPS: 43,
-  DUPLICATE_ID_EXCESS: 43,
-  DUPLICATE_URL_GROUPS: 72,
-  CATEGORY_CONFLICTS: 6,
-  BOOLEAN_CONFLICTS: 18,
+  DUPLICATE_ID_GROUPS: 0,
+  DUPLICATE_ID_EXCESS: 0,
+  DUPLICATE_URL_GROUPS: 38,
+  CATEGORY_CONFLICTS: 0,
+  BOOLEAN_CONFLICTS: 0,
 };
 
 const checks = [
