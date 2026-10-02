@@ -10,10 +10,30 @@ export interface NewsItem {
 }
 
 // 快讯数据 - 由 scripts/fetch-news.mjs 自动更新
-// 最后更新时间: 2026-10-01 04:01:53 UTC
+// 最后更新时间: 2026-10-02 03:57:42 UTC
 export const news: NewsItem[] = [
   {
     id: "news-001",
+    title: "何恺明团队新作：看猫片就能学会ARC挑战",
+    summary: "用ImageNet训练encoder",
+    source: "量子位",
+    sourceUrl: "https://www.qbitai.com",
+    url: "https://www.qbitai.com/2026/10/499812.html",
+    date: "2026-10-01",
+    category: "product",
+  },
+  {
+    id: "news-002",
+    title: "谷歌Gemini 4突然发布！RSI加持，GPT和Opus都让让",
+    summary: "价格只有Astra一半",
+    source: "量子位",
+    sourceUrl: "https://www.qbitai.com",
+    url: "https://www.qbitai.com/2026/10/499663.html",
+    date: "2026-10-01",
+    category: "product",
+  },
+  {
+    id: "news-003",
     title: "OpenAI推理之父最新访谈！数学只是多智能体时代的开胃菜",
     summary: "千禧年难题的突破，10000个Agent最多占了10%的功劳。",
     source: "量子位",
@@ -23,7 +43,7 @@ export const news: NewsItem[] = [
     category: "product",
   },
   {
-    id: "news-002",
+    id: "news-004",
     title: "直播回顾：工业AI的下一个机会在哪？",
     summary: "什么样的AI才适合工业现场？企业真正开始做工业AI时，又该从哪里下手？",
     source: "量子位",
@@ -33,32 +53,12 @@ export const news: NewsItem[] = [
     category: "product",
   },
   {
-    id: "news-003",
+    id: "news-005",
     title: "Anthropic，你是来给智谱打广告的吧！",
     summary: "实测说GLM-5.3很强",
     source: "量子位",
     sourceUrl: "https://www.qbitai.com",
     url: "https://www.qbitai.com/2026/09/499597.html",
-    date: "2026-09-30",
-    category: "product",
-  },
-  {
-    id: "news-004",
-    title: "Manus 2.0回来了！给AI配手机号和钱包，还能拉群干活",
-    summary: "给Agent配上手机号，再拉个群",
-    source: "量子位",
-    sourceUrl: "https://www.qbitai.com",
-    url: "https://www.qbitai.com/2026/09/499592.html",
-    date: "2026-09-30",
-    category: "product",
-  },
-  {
-    id: "news-005",
-    title: "刚刚，GPT-6 Astra接上宇树G1，把厨房收拾了！",
-    summary: "让GPT把机器人技能当工具调用",
-    source: "量子位",
-    sourceUrl: "https://www.qbitai.com",
-    url: "https://www.qbitai.com/2026/09/499493.html",
     date: "2026-09-30",
     category: "product",
   },
