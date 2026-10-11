@@ -10,7 +10,7 @@ export interface NewsItem {
 }
 
 // 快讯数据 - 由 scripts/fetch-news.mjs 自动更新
-// 最后更新时间: 2026-10-10 04:13:44 UTC
+// 最后更新时间: 2026-10-11 03:51:57 UTC
 export const news: NewsItem[] = [
   {
     id: "news-001",
